@@ -1,134 +1,738 @@
-# Codex Skills Inventory
+# Skills pessoais do Codex
 
-Generated on 2026-05-04 (America/Sao_Paulo).
+Gerado em 2026-05-04 (America/Sao_Paulo).
 
-This catalog lists metadata from local Codex `SKILL.md` files. It does not publish the full internal instructions of each skill.
+Escopo: somente skills criadas pelo usuario em `$CODEX_HOME/skills`. Foram excluidas as skills originais do Codex em `.system` e as skills vindas de plugins/cache.
 
-## Totals
+## Resumo
 
-| Metric | Count |
+| Metrica | Total |
 | --- | ---: |
-| Discovered `SKILL.md` files | 73 |
-| Available in the current Codex session | 70 |
-| Present on disk only | 3 |
+| Skills pessoais catalogadas | 7 |
 
-## Root aliases
+## Catalogo
 
-| Alias | Source | Root |
+| Skill | Arquivo | Descricao |
 | --- | --- | --- |
-| `r1` | System | `$CODEX_HOME/skills/.system` |
-| `r0` | Personal | `$CODEX_HOME/skills` |
-| `r2` | Browser Use | `$CODEX_HOME/plugins/cache/openai-bundled` |
-| `r3` | Figma | `$CODEX_HOME/plugins/cache/openai-curated/figma/f951c6ef/skills` |
-| `r4` | GitHub | `$CODEX_HOME/plugins/cache/openai-curated/github/f951c6ef/skills` |
-| `r6` | Gmail | `$CODEX_HOME/plugins/cache/openai-curated/gmail/f951c6ef/skills` |
-| `r5` | Vercel | `$CODEX_HOME/plugins/cache/openai-curated/vercel/f951c6ef/skills` |
+| `company-jobs` | [skills/company-jobs/SKILL.md](../skills/company-jobs/SKILL.md) | Find current job openings from a company's official website or careers page. Use when the user asks to read a company site, careers page, ATS board, or recruitment page and return all available vacancies, roles, jobs, positions, openings, or "vagas"; also use when the user provides only a company name and wants current hiring opportunities. |
+| `curadoria-eventos` | [skills/curadoria-eventos/SKILL.md](../skills/curadoria-eventos/SKILL.md) | Buscar, curar e retornar eventos atuais para uma cidade usando fontes oficiais, APIs, portais locais, Instagram/redes sociais e inteligencia de eventos, com opcao de gerar PDF bonito com imagem de fonte para cada evento. Use quando o usuario pedir eventos, agenda cultural, shows, gastronomia, eventos corporativos, eventos gratuitos, programacao de fim de semana, o que fazer, roles, destaques por data, periodo, categoria, bairro, ponto turistico ou cidade, ou quando pedir um PDF/relatorio visual da agenda. |
+| `gemini-interview-prep-prompt` | [skills/gemini-interview-prep-prompt/SKILL.md](../skills/gemini-interview-prep-prompt/SKILL.md) | Create a ready-to-paste Gemini prompt that turns Gemini into a rigorous, concise, respectful interview preparation coach and evaluator. Use when the user provides a professional CV/resume, LinkedIn/profile information, job description, extra context, hiring-process stage, recruiter notes, interview format, or asks to generate a prompt for Gemini to prepare someone for a job interview, mock interview, technical interview, HR screening, hiring-manager conversation, case interview, panel interview, or final interview. |
+| `job-fit-evaluator` | [skills/job-fit-evaluator/SKILL.md](../skills/job-fit-evaluator/SKILL.md) | Evaluate whether a job posting, recruiter message, LinkedIn role, or vacancy description is compatible with Ruben's CV, experience, target job profile, preferences, and positioning. Use when asked to assess job fit, match a role to the user's background, identify gaps, decide whether to apply, tailor a CV/profile summary, or explain how well a position aligns with the user's experience. |
+| `pessoa-due-diligence` | [skills/pessoa-due-diligence/SKILL.md](../skills/pessoa-due-diligence/SKILL.md) | Levantamento juridico, reputacional e de idoneidade documental de pessoa fisica com base em fontes publicas, oficiais ou autorizadas, reunindo documentos, links, processos, diarios oficiais, registros profissionais, sancoes, certidoes, sinais criminais publicos, informacoes militares publicas quando licitas e evidencias rastreaveis de boa ou ma conduta institucional. Use quando o usuario pedir investigacao juridica, due diligence, background check, "levantar tudo sobre uma pessoa", pesquisar processos, antecedentes, documentos, vinculos publicos, risco criminal, historico militar, certidoes, compliance, OSINT legal, reputacao, idoneidade, "indole" ou relatorio rastreavel sobre uma pessoa identificada ou parcialmente identificada. |
+| `prd-to-codex-prompt` | [skills/prd-to-codex-prompt/SKILL.md](../skills/prd-to-codex-prompt/SKILL.md) | Create a clear, complete initial prompt for OpenAI Codex from a Product Requirements Document (PRD). Use when the user wants to turn a PRD, product spec, feature brief, ticket, or requirements document into a Codex-ready prompt for implementation, refactoring, debugging, review, testing, or planning. The skill must require the user to provide or attach a PRD before drafting the prompt. |
+| `tailor-cv-to-job` | [skills/tailor-cv-to-job/SKILL.md](../skills/tailor-cv-to-job/SKILL.md) | Adapt an existing editable CV/resume to a specific job description while preserving the original document formatting and generating a PDF. Use when the user sends a vacancy/job description and asks to tailor, reescrever, otimizar para ATS, adaptar CV/curriculo/resume, extrair palavras-chave da vaga, update the Objective/Objetivo section, or create a PDF named for the candidate and job title without inventing experience or changing real job history. If the only source is PDF, use this skill only to save/analyze the original and request an editable source before producing the final formatted CV. |
 
-## System
+## Conteudo completo
 
-| Skill ID | Status | Path | Description |
+### company-jobs
+
+Origem: `$CODEX_HOME/skills/company-jobs/SKILL.md`
+
+````markdown
+---
+name: company-jobs
+description: Find current job openings from a company's official website or careers page. Use when the user asks to read a company site, careers page, ATS board, or recruitment page and return all available vacancies, roles, jobs, positions, openings, or "vagas"; also use when the user provides only a company name and wants current hiring opportunities.
+---
+
+# Company Jobs
+
+## Overview
+
+Find and return current vacancies from a company's official hiring surface. Prefer direct company or ATS sources over aggregators, verify information with live browsing when possible, and cite every source used.
+
+## Workflow
+
+1. Identify the official careers source.
+   - If the user provides a careers URL, start there.
+   - If the user provides only a company name, search the web for the official careers page, jobs page, or linked ATS board.
+   - Prefer official company domains and first-party linked ATS providers over LinkedIn, Indeed, Glassdoor, or scraped mirrors.
+
+2. Collect openings.
+   - Run `scripts/job_scraper.py` against the careers URL for a first pass:
+
+```bash
+python <skill-dir>/scripts/job_scraper.py "https://example.com/careers" --max-pages 40 --output markdown
+```
+
+   - If the page is JavaScript-heavy, protected by consent UI, or incomplete, use browser/web tools to inspect the rendered page and linked ATS endpoints.
+   - Read pagination, departments, location filters, and remote/hybrid filters. Do not assume the first page is complete.
+
+3. Normalize each role.
+   - Capture title, location or remote status, department/team when available, employment type when available, and the direct application/job-detail URL.
+   - Preserve exact public-facing titles.
+   - Exclude expired, closed, speculative, or "general application/talent pool" roles unless the user asks for them.
+
+4. Return the result in the user's language.
+   - Include the company/source name and access date.
+   - If roles were found, provide a compact table.
+   - If none were found, say which official pages were checked and whether the company has no listed vacancies or the site could not be read fully.
+
+## CV Handoff Notes
+
+When the user asks to use discovered vacancies to tailor Ruben's CV, hand the vacancy text to `tailor-cv-to-job` and preserve the current project CV base additions:
+
+- Keep `Claude Code`, `OpenAi Codex`, and `Agent Skills` in "Habilidades e Competencias".
+- Keep `Claude Code in Action - Anthropic`, `Introduction to Agent Skills - Anthropic`, `Introduction to Model Context Protocol - Anthropic`, and `Buiding with the Claude API - Anthropic` in "Formacao Complementar", using the same one-course-per-line style as the existing section.
+- Do not reinsert `Idiomas` or `Ingles` unless the user explicitly asks.
+
+## Output Format
+
+Use this shape unless the user requests another format:
+
+```markdown
+Encontrei N vagas abertas em <empresa> em <data>.
+
+| Vaga | Local | Area | Link |
 | --- | --- | --- | --- |
-| `imagegen` | `available_in_session` | `r1/imagegen/SKILL.md` | Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas. |
-| `openai-docs` | `available_in_session` | `r1/openai-docs/SKILL.md` | Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations, help choosing the latest model for a use case, or model upgrade and prompt-upgrade guidance; prioritize OpenAI docs MCP tools, use bundled references only as helper context, and restrict any fallback browsing to official OpenAI domains. |
-| `plugin-creator` | `available_in_session` | `r1/plugin-creator/SKILL.md` | Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, and baseline placeholders you can edit before publishing or testing. Use when Codex needs to create a new local plugin, add optional plugin structure, or generate or update repo-root `.agents/plugins/marketplace.json` entries for plugin ordering and availability metadata. |
-| `skill-creator` | `available_in_session` | `r1/skill-creator/SKILL.md` | Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations. |
-| `skill-installer` | `available_in_session` | `r1/skill-installer/SKILL.md` | Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). |
+| <title> | <location> | <department> | <url> |
 
-## Personal
+Fontes: <career page>, <ATS page if separate>
+Observacoes: <pagination/rendering limitations, if any>
+```
 
-| Skill ID | Status | Path | Description |
-| --- | --- | --- | --- |
-| `company-jobs` | `available_in_session` | `r0/company-jobs/SKILL.md` | Find current job openings from a company's official website or careers page. Use when the user asks to read a company site, careers page, ATS board, or recruitment page and return all available vacancies, roles, jobs, positions, openings, or "vagas"; also use when the user provides only a company name and wants current hiring opportunities. |
-| `curadoria-eventos` | `available_in_session` | `r0/curadoria-eventos/SKILL.md` | Buscar, curar e retornar eventos atuais para uma cidade usando fontes oficiais, APIs, portais locais, Instagram/redes sociais e inteligencia de eventos, com opcao de gerar PDF bonito com imagem de fonte para cada evento. Use quando o usuario pedir eventos, agenda cultural, shows, gastronomia, eventos corporativos, eventos gratuitos, programacao de fim de semana, o que fazer, roles, destaques por data, periodo, categoria, bairro, ponto turistico ou cidade, ou quando pedir um PDF/relatorio visual da agenda. |
-| `gemini-interview-prep-prompt` | `available_in_session` | `r0/gemini-interview-prep-prompt/SKILL.md` | Create a ready-to-paste Gemini prompt that turns Gemini into a rigorous, concise, respectful interview preparation coach and evaluator. Use when the user provides a professional CV/resume, LinkedIn/profile information, job description, extra context, hiring-process stage, recruiter notes, interview format, or asks to generate a prompt for Gemini to prepare someone for a job interview, mock interview, technical interview, HR screening, hiring-manager conversation, case interview, panel interview, or final interview. |
-| `job-fit-evaluator` | `available_in_session` | `r0/job-fit-evaluator/SKILL.md` | Evaluate whether a job posting, recruiter message, LinkedIn role, or vacancy description is compatible with Ruben's CV, experience, target job profile, preferences, and positioning. Use when asked to assess job fit, match a role to the user's background, identify gaps, decide whether to apply, tailor a CV/profile summary, or explain how well a position aligns with the user's experience. |
-| `pessoa-due-diligence` | `available_in_session` | `r0/pessoa-due-diligence/SKILL.md` | Levantamento juridico, reputacional e de idoneidade documental de pessoa fisica com base em fontes publicas, oficiais ou autorizadas, reunindo documentos, links, processos, diarios oficiais, registros profissionais, sancoes, certidoes, sinais criminais publicos, informacoes militares publicas quando licitas e evidencias rastreaveis de boa ou ma conduta institucional. Use quando o usuario pedir investigacao juridica, due diligence, background check, "levantar tudo sobre uma pessoa", pesquisar processos, antecedentes, documentos, vinculos publicos, risco criminal, historico militar, certidoes, compliance, OSINT legal, reputacao, idoneidade, "indole" ou relatorio rastreavel sobre uma pessoa identificada ou parcialmente identificada. |
-| `prd-to-codex-prompt` | `available_in_session` | `r0/prd-to-codex-prompt/SKILL.md` | Create a clear, complete initial prompt for OpenAI Codex from a Product Requirements Document (PRD). Use when the user wants to turn a PRD, product spec, feature brief, ticket, or requirements document into a Codex-ready prompt for implementation, refactoring, debugging, review, testing, or planning. The skill must require the user to provide or attach a PRD before drafting the prompt. |
-| `tailor-cv-to-job` | `available_in_session` | `r0/tailor-cv-to-job/SKILL.md` | Adapt an existing editable CV/resume to a specific job description while preserving the original document formatting and generating a PDF. Use when the user sends a vacancy/job description and asks to tailor, reescrever, otimizar para ATS, adaptar CV/curriculo/resume, extrair palavras-chave da vaga, update the Objective/Objetivo section, or create a PDF named for the candidate and job title without inventing experience or changing real job history. If the only source is PDF, use this skill only to save/analyze the original and request an editable source before producing the final formatted CV. |
+## Source Handling
 
-## Browser Use
+- Browse for current data; job listings change frequently.
+- Cite the exact pages checked.
+- If using search results to discover the careers page, still validate against the official page.
+- Do not log in, bypass access controls, solve CAPTCHAs, or scrape private/internal job systems.
+- Respect rate limits. Keep crawls small and targeted.
 
-| Skill ID | Status | Path | Description |
-| --- | --- | --- | --- |
-| `browser-use:browser` | `available_in_session` | `r2/browser-use/0.1.0-alpha1/skills/browser/SKILL.md` | Use the Codex in-app browser to inspect, navigate, test, or automate local targets such as localhost, 127.0.0.1, ::1, file://, or the current in-app browser tab. |
+## Script Notes
 
-## Figma
+`scripts/job_scraper.py` is a best-effort helper for static HTML, JSON-LD `JobPosting`, and common ATS link patterns. Treat it as a discovery aid, not the final authority. For dynamic boards such as Greenhouse, Lever, Ashby, Workday, SmartRecruiters, Recruitee, Workable, Gupy, and BambooHR, combine script output with direct browser inspection when needed.
 
-| Skill ID | Status | Path | Description |
-| --- | --- | --- | --- |
-| `figma:figma-code-connect` | `available_in_session` | `r3/figma-code-connect-components/SKILL.md` | Creates and maintains Figma Code Connect template files that map Figma components to code snippets. Use when the user mentions Code Connect, Figma component mapping, design-to-code translation, or asks to create/update .figma.js files. |
-| `figma:figma-create-design-system-rules` | `available_in_session` | `r3/figma-create-design-system-rules/SKILL.md` | Generates custom design system rules for the user's codebase. Use when user says "create design system rules", "generate rules for my project", "set up design rules", "customize design system guidelines", or wants to establish project-specific conventions for Figma-to-code workflows. Requires Figma MCP server connection. |
-| `figma:figma-create-new-file` | `present_on_disk_only` | `r3/figma-create-new-file/SKILL.md` | Create a new blank Figma file. Use when the user wants to create a new Figma design or FigJam file, or when you need a new file before calling use_figma. Handles plan resolution via whoami if needed. Usage - /figma-create-new-file [editorType] [fileName] (e.g. /figma-create-new-file figjam My Whiteboard) |
-| `figma:figma-generate-design` | `available_in_session` | `r3/figma-generate-design/SKILL.md` | Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma. Triggers: 'write to Figma', 'create in Figma from code', 'push page to Figma', 'take this app/page and build it in Figma', 'create a screen', 'build a landing page in Figma', 'update the Figma screen to match code'. This is the preferred workflow skill whenever the user wants to build or update a full page, screen, or view in Figma from code or a description. Discovers design system components, variables, and styles via search_design_system, imports them, and assembles screens incrementally section-by-section using design system tokens instead of hardcoded values. |
-| `figma:figma-generate-library` | `available_in_session` | `r3/figma-generate-library/SKILL.md` | Build or update a professional-grade design system in Figma from a codebase. Use when the user wants to create variables/tokens, build component libraries, set up theming (light/dark modes), document foundations, or reconcile gaps between code and Figma. This skill teaches WHAT to build and in WHAT ORDER - it complements the `figma-use` skill which teaches HOW to call the Plugin API. Both skills should be loaded together. |
-| `figma:figma-implement-design` | `available_in_session` | `r3/figma-implement-design/SKILL.md` | Translates Figma designs into production-ready application code with 1:1 visual fidelity. Use when implementing UI code from Figma files, when user mentions "implement design", "generate code", "implement component", provides Figma URLs, or asks to build components matching Figma specs. For Figma canvas writes via `use_figma`, use `figma-use`. |
-| `figma:figma-use` | `available_in_session` | `r3/figma-use/SKILL.md` | **MANDATORY prerequisite** - you MUST invoke this skill BEFORE every `use_figma` tool call. NEVER call `use_figma` directly without loading this skill first. Skipping it causes common, hard-to-debug failures. Trigger whenever the user wants to perform a write action or a unique read action that requires JavaScript execution in the Figma file context - e.g. create/edit/delete nodes, set up variables or tokens, build components and variants, modify auto-layout or fills, bind variables to properties, or inspect file structure programmatically. |
+Read `references/job-board-patterns.md` only when a site uses a known ATS or the first pass misses obvious listings.
+````
 
-## GitHub
+### curadoria-eventos
 
-| Skill ID | Status | Path | Description |
-| --- | --- | --- | --- |
-| `github:gh-address-comments` | `available_in_session` | `r4/gh-address-comments/SKILL.md` | Address actionable GitHub pull request review feedback. Use when the user wants to inspect unresolved review threads, requested changes, or inline review comments on a PR, then implement selected fixes. Use the GitHub app for PR metadata and flat comment reads, and use the bundled GraphQL script via `gh` whenever thread-level state, resolution status, or inline review context matters. |
-| `github:gh-fix-ci` | `available_in_session` | `r4/gh-fix-ci/SKILL.md` | Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions. Use the GitHub app from this plugin for PR metadata and patch context, and use `gh` for Actions check and log inspection before implementing any approved fix. |
-| `github:github` | `available_in_session` | `r4/github/SKILL.md` | Triage and orient GitHub repository, pull request, and issue work through the connected GitHub app. Use when the user asks for general GitHub help, wants PR or issue summaries, or needs repository context before choosing a more specific GitHub workflow. |
-| `github:yeet` | `available_in_session` | `r4/yeet/SKILL.md` | Publish local changes to GitHub by confirming scope, committing intentionally, pushing the branch, and opening a draft PR through the GitHub app from this plugin, with `gh` used only as a fallback where connector coverage is insufficient. |
+Origem: `$CODEX_HOME/skills/curadoria-eventos/SKILL.md`
 
-## Gmail
+````markdown
+---
+name: curadoria-eventos
+description: Buscar, curar e retornar eventos atuais para uma cidade usando fontes oficiais, APIs, portais locais, Instagram/redes sociais e inteligencia de eventos, com opcao de gerar PDF bonito com imagem de fonte para cada evento. Use quando o usuario pedir eventos, agenda cultural, shows, gastronomia, eventos corporativos, eventos gratuitos, programacao de fim de semana, o que fazer, roles, destaques por data, periodo, categoria, bairro, ponto turistico ou cidade, ou quando pedir um PDF/relatorio visual da agenda.
+---
 
-| Skill ID | Status | Path | Description |
-| --- | --- | --- | --- |
-| `gmail:gmail` | `present_on_disk_only` | `r6/gmail/SKILL.md` | Manage Gmail inbox triage, mailbox search, thread summaries, action extraction, reply drafting, and email forwarding through connected Gmail data. Use when the user wants to inspect a mailbox or thread, search email with Gmail query syntax, summarize messages, extract decisions and follow-ups, prepare replies or forwarded messages, or organize messages with explicit confirmation before send, archive, delete, or label actions. |
-| `gmail:gmail-inbox-triage` | `present_on_disk_only` | `r6/gmail-inbox-triage/SKILL.md` | Triage a Gmail inbox into actionable buckets such as urgent, needs reply soon, waiting, and FYI using connected Gmail data. Use when the user asks to triage the inbox, rank what needs attention, find what still needs a reply, or separate important mail from noise. |
+# Curadoria de Eventos
 
-## Vercel
+## Objetivo
 
-| Skill ID | Status | Path | Description |
-| --- | --- | --- | --- |
-| `vercel:agent-browser` | `available_in_session` | `r5/agent-browser/SKILL.md` | Browser automation CLI for AI agents. Use when the user needs to interact with websites, verify dev server output, test web apps, navigate pages, fill forms, click buttons, take screenshots, extract data, or automate any browser task. Also triggers when a dev server starts so you can verify it visually. |
-| `vercel:agent-browser-verify` | `available_in_session` | `r5/agent-browser-verify/SKILL.md` | Automated browser verification for dev servers. Triggers when a dev server starts to run a visual gut-check with agent-browser - verifies the page loads, checks for console errors, validates key UI elements, and reports pass/fail before continuing. |
-| `vercel:ai-elements` | `available_in_session` | `r5/ai-elements/SKILL.md` | AI Elements component library guidance - pre-built React components for AI interfaces built on shadcn/ui. Use when building chat UIs, message displays, tool call rendering, streaming responses, reasoning panels, or any AI-native interface with the AI SDK. |
-| `vercel:ai-gateway` | `available_in_session` | `r5/ai-gateway/SKILL.md` | Vercel AI Gateway expert guidance. Use when configuring model routing, provider failover, cost tracking, or managing multiple AI providers through a unified API. |
-| `vercel:ai-generation-persistence` | `available_in_session` | `r5/ai-generation-persistence/SKILL.md` | AI generation persistence patterns - unique IDs, addressable URLs, database storage, and cost tracking for every LLM generation |
-| `vercel:ai-sdk` | `available_in_session` | `r5/ai-sdk/SKILL.md` | Vercel AI SDK expert guidance. Use when building AI-powered features - chat interfaces, text generation, structured output, tool calling, agents, MCP integration, streaming, embeddings, reranking, image generation, or working with any LLM provider. |
-| `vercel:auth` | `available_in_session` | `r5/auth/SKILL.md` | Authentication integration guidance - Clerk (native Vercel Marketplace), Descope, and Auth0 setup for Next.js applications. Covers middleware auth patterns, sign-in/sign-up flows, and Marketplace provisioning. Use when implementing user authentication. |
-| `vercel:bootstrap` | `available_in_session` | `r5/bootstrap/SKILL.md` | Project bootstrapping orchestrator for repos that depend on Vercel-linked resources (databases, auth, and managed integrations). Use when setting up or repairing a repository so linking, environment provisioning, env pulls, and first-run db/dev commands happen in the correct safe order. |
-| `vercel:chat-sdk` | `available_in_session` | `r5/chat-sdk/SKILL.md` | Vercel Chat SDK expert guidance. Use when building multi-platform chat bots - Slack, Telegram, Microsoft Teams, Discord, Google Chat, GitHub, Linear - with a single codebase. Covers the Chat class, adapters, threads, messages, cards, modals, streaming, state management, and webhook setup. |
-| `vercel:cms` | `available_in_session` | `r5/cms/SKILL.md` | Headless CMS integration guidance - Sanity (native Vercel Marketplace), Contentful, DatoCMS, Storyblok, and Builder.io. Covers studio setup, content modeling, preview mode, revalidation webhooks, and Visual Editing. Use when building content-driven sites with a headless CMS on Vercel. |
-| `vercel:cron-jobs` | `available_in_session` | `r5/cron-jobs/SKILL.md` | Vercel Cron Jobs configuration and best practices. Use when adding, editing, or debugging scheduled tasks in vercel.json. |
-| `vercel:deployments-cicd` | `available_in_session` | `r5/deployments-cicd/SKILL.md` | Vercel deployment and CI/CD expert guidance. Use when deploying, promoting, rolling back, inspecting deployments, building with --prebuilt, or configuring CI workflow files for Vercel. |
-| `vercel:email` | `available_in_session` | `r5/email/SKILL.md` | Email sending integration guidance - Resend (native Vercel Marketplace) with React Email templates. Covers API setup, transactional emails, domain verification, and template patterns. Use when sending emails from a Vercel-deployed application. |
-| `vercel:env-vars` | `available_in_session` | `r5/env-vars/SKILL.md` | Vercel environment variable expert guidance. Use when working with .env files, vercel env commands, OIDC tokens, or managing environment-specific configuration. |
-| `vercel:geist` | `available_in_session` | `r5/geist/SKILL.md` | Expert guidance for Geist, Vercel's default typography system and font family for precise Next.js interfaces. Use when configuring Geist Sans, Geist Mono, or Geist Pixel, setting up font imports, or applying Vercel typography and aesthetic guidance. |
-| `vercel:geistdocs` | `available_in_session` | `r5/geistdocs/SKILL.md` | Expert guidance for Geistdocs, Vercel's documentation template built with Next.js and Fumadocs - MDX authoring, configuration, AI chat, i18n, feedback, deployment. Use when creating documentation sites, configuring geistdocs, writing MDX content, or setting up docs infrastructure. |
-| `vercel:investigation-mode` | `available_in_session` | `r5/investigation-mode/SKILL.md` | Orchestrated debugging coordinator. Triggers on frustration signals (stuck, hung, broken, waiting) and systematically triages: runtime logs -> workflow status -> browser verify -> deploy/env. Reports findings at every step. |
-| `vercel:json-render` | `available_in_session` | `r5/json-render/SKILL.md` | AI chat response rendering guidance - handling UIMessage parts, tool call displays, streaming states, and structured data presentation. Use when building custom chat UIs, rendering tool results, or troubleshooting AI response display issues. |
-| `vercel:marketplace` | `available_in_session` | `r5/marketplace/SKILL.md` | Vercel Marketplace expert guidance - discovering, installing, and building integrations, auto-provisioned environment variables, unified billing, and the vercel integration CLI. Use when consuming third-party services, building custom integrations, or managing marketplace resources on Vercel. |
-| `vercel:micro` | `available_in_session` | `r5/micro/SKILL.md` | Expert guidance for micro - asynchronous HTTP microservices framework by Vercel. Use when building lightweight HTTP servers, API endpoints, or microservices using the micro library. |
-| `vercel:ncc` | `available_in_session` | `r5/ncc/SKILL.md` | Expert guidance for @vercel/ncc - a simple CLI for compiling Node.js modules into a single file with all dependencies included. Use when bundling serverless functions, CLI tools, or any Node.js project into a self-contained file. |
-| `vercel:next-forge` | `available_in_session` | `r5/next-forge/SKILL.md` | next-forge expert guidance - production-grade Turborepo monorepo SaaS starter by Vercel. Use when working in a next-forge project, scaffolding with `npx next-forge init`, or editing @repo/* workspace packages. |
-| `vercel:nextjs` | `available_in_session` | `r5/nextjs/SKILL.md` | Next.js App Router expert guidance. Use when building, debugging, or architecting Next.js applications - routing, Server Components, Server Actions, Cache Components, layouts, middleware/proxy, data fetching, rendering strategies, and deployment on Vercel. |
-| `vercel:observability` | `available_in_session` | `r5/observability/SKILL.md` | Vercel Observability expert guidance - Drains (logs, traces, speed insights, web analytics), Web Analytics, Speed Insights, runtime logs, custom events, OpenTelemetry integration, and monitoring dashboards. Use when instrumenting, debugging, or optimizing application performance and user experience on Vercel. |
-| `vercel:payments` | `available_in_session` | `r5/payments/SKILL.md` | Stripe payments integration guidance - native Vercel Marketplace setup, checkout sessions, webhook handling, subscription billing, and the Stripe SDK. Use when implementing payments, subscriptions, or processing transactions. |
-| `vercel:react-best-practices` | `available_in_session` | `r5/react-best-practices/SKILL.md` | React best-practices reviewer for TSX files. Triggers after editing multiple TSX components to run a condensed quality checklist covering component structure, hooks usage, accessibility, performance, and TypeScript patterns. |
-| `vercel:routing-middleware` | `available_in_session` | `r5/routing-middleware/SKILL.md` | Vercel Routing Middleware guidance - request interception before cache, rewrites, redirects, personalization. Works with any framework. Supports Edge, Node.js, and Bun runtimes. Use when intercepting requests at the platform level. |
-| `vercel:runtime-cache` | `available_in_session` | `r5/runtime-cache/SKILL.md` | Vercel Runtime Cache API guidance - ephemeral per-region key-value cache with tag-based invalidation. Shared across Functions, Routing Middleware, and Builds. Use when implementing caching strategies beyond framework-level caching. |
-| `vercel:satori` | `available_in_session` | `r5/satori/SKILL.md` | Expert guidance for Satori - Vercel's library that converts HTML and CSS to SVG, commonly used to generate dynamic OG images for Next.js and other frameworks. |
-| `vercel:shadcn` | `available_in_session` | `r5/shadcn/SKILL.md` | shadcn/ui expert guidance - CLI, component installation, composition patterns, custom registries, theming, Tailwind CSS integration, and high-quality interface design. Use when initializing shadcn, adding components, composing product UI, building custom registries, configuring themes, or troubleshooting component issues. |
-| `vercel:sign-in-with-vercel` | `available_in_session` | `r5/sign-in-with-vercel/SKILL.md` | Sign in with Vercel guidance - OAuth 2.0/OIDC identity provider for user authentication via Vercel accounts. Use when implementing user login with Vercel as the identity provider. |
-| `vercel:swr` | `available_in_session` | `r5/swr/SKILL.md` | SWR data-fetching expert guidance. Use when building React apps with client-side data fetching, caching, revalidation, mutations, optimistic UI, pagination, or infinite loading using the SWR library. |
-| `vercel:turbopack` | `available_in_session` | `r5/turbopack/SKILL.md` | Turbopack expert guidance. Use when configuring the Next.js bundler, optimizing HMR, debugging build issues, or understanding the Turbopack vs Webpack differences. |
-| `vercel:turborepo` | `available_in_session` | `r5/turborepo/SKILL.md` | Turborepo expert guidance. Use when setting up or optimizing monorepo builds, configuring task caching, remote caching, parallel execution, or the --affected flag for incremental CI. |
-| `vercel:v0-dev` | `available_in_session` | `r5/v0-dev/SKILL.md` | v0 by Vercel expert guidance. Use when discussing AI code generation, generating UI components from prompts, v0 CLI usage, v0 SDK/API integration, or integrating v0 into development workflows with GitHub and Vercel deployment. |
-| `vercel:vercel-agent` | `available_in_session` | `r5/vercel-agent/SKILL.md` | Vercel Agent guidance - AI-powered code review, incident investigation, and SDK installation. Automates PR analysis and anomaly debugging. Use when configuring or understanding Vercel's AI development tools. |
-| `vercel:vercel-api` | `available_in_session` | `r5/vercel-api/SKILL.md` | Vercel app and REST API expert guidance. Use when the agent needs live access to Vercel projects, deployments, environment variables, domains, logs, or documentation through the connected Vercel app or REST API. |
-| `vercel:vercel-cli` | `available_in_session` | `r5/vercel-cli/SKILL.md` | Vercel CLI expert guidance. Use when deploying, managing environment variables, linking projects, viewing logs, managing domains, or interacting with the Vercel platform from the command line. |
-| `vercel:vercel-firewall` | `available_in_session` | `r5/vercel-firewall/SKILL.md` | Vercel Firewall and security expert guidance. Use when configuring DDoS protection, WAF rules, rate limiting, bot filtering, IP allow/block lists, OWASP rulesets, Attack Challenge Mode, or any security configuration on the Vercel platform. |
-| `vercel:vercel-flags` | `available_in_session` | `r5/vercel-flags/SKILL.md` | Vercel Flags guidance - feature flags platform with unified dashboard, Flags Explorer, gradual rollouts, A/B testing, and provider adapters. Use when implementing feature flags, experimentation, or staged rollouts. |
-| `vercel:vercel-functions` | `available_in_session` | `r5/vercel-functions/SKILL.md` | Vercel Functions expert guidance - Serverless Functions, Edge Functions, Fluid Compute, streaming, Cron Jobs, and runtime configuration. Use when configuring, debugging, or optimizing server-side code running on Vercel. |
-| `vercel:vercel-queues` | `available_in_session` | `r5/vercel-queues/SKILL.md` | Vercel Queues guidance (public beta) - durable event streaming with topics, consumer groups, retries, and delayed delivery. $0.60/1M ops. Powers Workflow DevKit. Use when building async processing, fan-out patterns, or event-driven architectures. |
-| `vercel:vercel-sandbox` | `available_in_session` | `r5/vercel-sandbox/SKILL.md` | Vercel Sandbox guidance - ephemeral Firecracker microVMs for running untrusted code safely. Supports AI agents, code generation, and experimentation. Use when executing user-generated or AI-generated code in isolation. |
-| `vercel:vercel-services` | `available_in_session` | `r5/vercel-services/SKILL.md` | Vercel Services - deploy multiple services within a single Vercel project. Use for monorepo layouts or when combining a backend (Python, Go) with a frontend (Next.js, Vite) in one deployment. |
-| `vercel:vercel-storage` | `available_in_session` | `r5/vercel-storage/SKILL.md` | Vercel storage expert guidance - Blob, Edge Config, and Marketplace storage (Neon Postgres, Upstash Redis). Use when choosing, configuring, or using data storage with Vercel applications. |
-| `vercel:verification` | `available_in_session` | `r5/verification/SKILL.md` | Full-story verification - infers what the user is building, then verifies the complete flow end-to-end: browser -> API -> data -> response. Triggers on dev server start and 'why isn't this working' signals. |
-| `vercel:workflow` | `available_in_session` | `r5/workflow/SKILL.md` | Vercel Workflow DevKit (WDK) expert guidance. Use when building durable workflows, long-running tasks, API routes or agents that need pause/resume, retries, step-based execution, or crash-safe orchestration with Vercel Workflow. |
+Encontrar eventos atuais para a cidade solicitada, remover duplicidades, priorizar informacoes completas e entregar uma resposta agil em JSON valido ou em PDF visual quando o usuario pedir relatorio, arquivo, PDF ou material apresentavel.
+
+## Entradas
+
+Extraia da mensagem do usuario:
+
+- Cidade obrigatoria. Se nao houver cidade, peca a cidade antes de pesquisar.
+- Data ou periodo, como hoje, amanha, este final de semana, semana que vem, mes especifico ou intervalo de datas. Converta expressoes relativas para datas absolutas usando a data atual da conversa.
+- Categoria opcional: shows, musica, teatro, gastronomia, corporativo, infantil, esporte, gratuito, exposicoes, festivais, feiras, cursos, networking ou outra categoria indicada.
+- Localizacao especifica opcional: bairro, regiao, casa de show, parque, centro cultural, arena, praia, ponto turistico ou raio aproximado.
+
+Quando a categoria nao for especificada, montar um "Mix de Destaques" com eventos variados e relevantes.
+
+## Fontes
+
+Use fontes atuais e rastreaveis. Pesquise na web quando a informacao puder ter mudado ou quando precisar confirmar disponibilidade, data, preco ou link.
+
+Priorize, nesta ordem:
+
+1. Paginas oficiais do evento, produtor, casa de show, equipamento cultural, prefeitura ou secretaria municipal.
+2. Plataformas de venda e descoberta: Ticketmaster, Sympla, Eventbrite, Uhuu.com e similares.
+3. Portais e guias locais: G1, Catraca Livre, jornais locais, revistas culturais e calendarios oficiais.
+4. Redes sociais publicas, incluindo uma etapa obrigatoria de Instagram com 4 perfis locais da cidade, quando a web aberta trouxer evidencias suficientes.
+5. Inteligencia de eventos, como PredictHQ, quando houver acesso ou resultados publicos verificaveis.
+
+Nao invente evento, preco, horario, endereco ou link. Quando uma fonte exigir API key ou login indisponivel, use a melhor fonte publica alternativa e reduza a confianca de itens incompletos.
+
+## Instagram local
+
+Inclua Instagram como uma das fontes de busca. Para cada cidade pesquisada:
+
+1. Elencar 4 perfis publicos relevantes da cidade antes de fechar a curadoria.
+2. Priorizar nesta ordem:
+   - perfil oficial da prefeitura, secretaria de cultura/turismo ou fundacao cultural;
+   - perfis oficiais de equipamentos culturais, teatros, centros culturais, arenas, shopping centers ou casas de show;
+   - guias/portais locais de agenda, turismo, gastronomia ou entretenimento;
+   - produtores, coletivos, festas, feiras, bares ou restaurantes com agenda recorrente.
+3. Buscar nos perfis por posts, reels, destaques, legendas publicas e paginas indexadas que mencionem o periodo, a cidade, local, horario, preco ou link.
+4. Registrar internamente os 4 perfis consultados com `perfil`, `url`, `tipo` e `evidencia_encontrada`.
+5. Usar eventos encontrados no Instagram somente quando houver evidencia publica suficiente e rastreavel. Preferir link do post/perfil oficial ou link da bio quando for o unico canal de venda/informacao.
+6. Cruzar eventos vindos do Instagram com outra fonte sempre que possivel. Se o Instagram for a unica fonte, marcar no resumo uma observacao curta como "divulgado pelo perfil oficial/local".
+
+Nao use conteudo privado, nao burle login, nao dependa de stories nao acessiveis publicamente e nao invente informacoes ausentes em artes ou legendas. Se o Instagram bloquear acesso direto, pesquisar a combinacao `site:instagram.com cidade evento periodo` e usar resultados publicos indexados, ou consultar perfis alternativos locais.
+
+## Imagens
+
+Quando gerar PDF, cada evento deve ter uma imagem retirada da mesma fonte usada para o evento ou da fonte oficial consolidada:
+
+- Preferir `og:image`, `twitter:image` ou imagem principal da pagina do evento.
+- Se a fonte de venda nao tiver imagem acessivel, usar imagem da pagina oficial do evento, produtor, equipamento cultural ou portal local que confirmou o evento.
+- Nao usar imagens genericas, bancos de imagem, IA generativa ou imagens de fontes que nao falem daquele evento.
+- Registrar internamente `imagem_url`, `imagem_fonte` e `fonte_nome` para cada evento antes de gerar o PDF.
+- Se nao houver imagem rastreavel para um candidato, priorizar outro evento equivalente com imagem confirmada. So manter evento sem imagem se o usuario pedir explicitamente para nao descartar eventos incompletos.
+
+## Workflow
+
+1. Interpretar a cidade, o periodo, a categoria e a localizacao especifica.
+2. Montar consultas combinando cidade, periodo, categoria e termos como agenda, eventos, ingressos, gratuito, prefeitura, Sympla, Eventbrite, Ticketmaster, Uhuu, Uhuu.com, G1, Catraca Livre e jornal local.
+3. Elencar 4 perfis de Instagram da cidade e buscar evidencias publicas de eventos neles.
+4. Coletar candidatos de multiplas fontes e manter o link mais confiavel para cada evento.
+5. Normalizar nomes, datas, locais, categorias e precos.
+6. Remover duplicados.
+7. Priorizar eventos com local, data, horario, preco e link de venda ou informacao.
+8. Retornar somente eventos que ocorram dentro do periodo solicitado e na cidade/regiao pedida.
+9. Se a busca trouxer poucos resultados, ampliar para fontes oficiais, portais locais e novos perfis locais antes de devolver a resposta.
+10. Quando o usuario pedir PDF, coletar imagem de fonte para cada evento e gerar o arquivo com `scripts/generate_event_pdf.py`.
+
+## Deduplicacao
+
+Considere duplicados os eventos com alta semelhanca de nome e mesma data ou mesmo local. Ao consolidar:
+
+- Preferir o link oficial ou de venda direta.
+- Preservar o menor preco confirmado quando houver faixa de valores.
+- Completar dados faltantes usando fontes secundarias confiaveis.
+- Manter apenas um registro por sessao/data quando o mesmo evento aparece em varios sites.
+- Para temporadas, pecas e exposicoes com varias datas, incluir a data ou faixa relevante ao pedido.
+
+## Priorizacao
+
+Ordene por relevancia para o pedido, considerando:
+
+- Correspondencia com periodo, cidade, categoria e bairro/ponto turistico.
+- Completude: local, horario, preco e link.
+- Fonte oficial ou fonte com venda ativa.
+- Popularidade, destaque editorial, lotacao esperada ou sinais de demanda.
+- Diversidade de categorias quando for "Mix de Destaques".
+
+Para eventos gratuitos, confirme se o item e realmente gratuito ou se exige inscricao/retirada de ingresso. Use `preco` como "Gratuito" ou "Gratuito, mediante inscricao" quando aplicavel.
+
+## Saida JSON
+
+Quando o usuario pedir somente dados, responda em tom informativo, agil e prestativo, mas a entrega final deve ser somente JSON valido, sem Markdown e sem texto antes ou depois.
+
+Para multiplos eventos, retorne um array de objetos. Cada objeto deve ter exatamente estas chaves:
+
+```json
+{
+  "evento": "",
+  "data_hora": "",
+  "local": "",
+  "categoria": "",
+  "preco": "",
+  "link_venda": "",
+  "resumo": ""
+}
+```
+
+Regras de preenchimento:
+
+- `evento`: nome oficial ou nome mais reconhecivel.
+- `data_hora`: data e horario em formato humano claro; use datas absolutas sempre que possivel.
+- `local`: nome do espaco e bairro/cidade quando disponivel.
+- `categoria`: categoria principal; use "Mix de Destaques" somente quando for uma selecao sem categoria unica.
+- `preco`: valor, faixa de valores, "Gratuito", "Nao informado" ou "A confirmar".
+- `link_venda`: URL oficial, pagina de ingressos ou pagina informativa mais confiavel.
+- `resumo`: uma frase curta com o motivo do destaque e qualquer observacao pratica relevante.
+
+Se nenhum evento confiavel for encontrado, retorne `[]`.
+
+## Saida PDF
+
+Quando o usuario pedir PDF, relatorio, roteiro visual, agenda diagramada ou material bonito:
+
+1. Curar os eventos normalmente.
+2. Criar um JSON interno com os campos obrigatorios e estes campos extras por evento: `imagem_url`, `imagem_fonte`, `fonte_nome`.
+3. Salvar esse JSON em um arquivo de trabalho no diretorio do projeto atual.
+4. Executar:
+
+```bash
+python C:/Users/ruben/.codex/skills/curadoria-eventos/scripts/generate_event_pdf.py --input eventos.json --output agenda-eventos.pdf --title "Agenda de eventos" --subtitle "Cidade e periodo pesquisados"
+```
+
+5. Conferir se o PDF foi criado e se cada card tem imagem.
+6. Responder ao usuario com o caminho do PDF e, se util, mencionar que as imagens foram extraidas das fontes dos eventos.
+
+O PDF deve ter layout editorial limpo, capa curta, cards com imagem, data/hora, local, categoria, preco, resumo e link clicavel. Nao despeje o JSON inteiro na resposta final quando o pedido principal for o PDF.
+
+Por padrao, o script falha se algum evento ficar sem imagem. Se o usuario autorizar eventos incompletos, executar novamente com `--allow-missing-images`.
+
+Em ambiente com sandbox, a renderizacao por navegador headless pode exigir aprovacao/escalacao; se a primeira tentativa criar apenas o HTML e falhar no PDF, repetir o mesmo comando com permissao apropriada.
+
+O script aceita JSON como array de eventos ou como objeto:
+
+```json
+{
+  "titulo": "Agenda de eventos",
+  "subtitulo": "Jundiai, 1 a 3 de maio de 2026",
+  "eventos": []
+}
+```
+````
+
+### gemini-interview-prep-prompt
+
+Origem: `$CODEX_HOME/skills/gemini-interview-prep-prompt/SKILL.md`
+
+````markdown
+---
+name: gemini-interview-prep-prompt
+description: Create a ready-to-paste Gemini prompt that turns Gemini into a rigorous, concise, respectful interview preparation coach and evaluator. Use when the user provides a professional CV/resume, LinkedIn/profile information, job description, extra context, hiring-process stage, recruiter notes, interview format, or asks to generate a prompt for Gemini to prepare someone for a job interview, mock interview, technical interview, HR screening, hiring-manager conversation, case interview, panel interview, or final interview.
+---
+
+# Gemini Interview Prep Prompt
+
+## Overview
+
+Create a complete prompt for Gemini to act as an interview preparation coach for a specific professional, vacancy, and selection-process stage. The final answer should usually be only the prompt ready to paste into Gemini, unless the user asks for explanation or variants.
+
+## Workflow
+
+1. Gather inputs from the user message and attached files: CV/profile, job description, company/context, process stage, interview format, language, seniority, target role, known recruiter feedback, concerns, constraints, and extra instructions.
+2. If a core input is missing, make a reasonable placeholder inside the prompt instead of blocking, using bracketed fields such as `[colar CV aqui]`, `[colar descritivo da vaga aqui]`, or `[informar etapa]`.
+3. Identify the interview stage and adapt emphasis:
+   - HR screening: motivation, fit, communication, compensation, availability, career narrative.
+   - Hiring manager: role scope, impact examples, stakeholder management, priorities, decision-making.
+   - Technical interview: hard skills, tools, architecture, trade-offs, debugging, depth checks.
+   - Case or assignment: structure, assumptions, clarifying questions, business reasoning, presentation.
+   - Panel or final: executive presence, consistency, strategic fit, risk areas, concise storytelling.
+4. Use the detailed structure in [references/gemini-prompt-template.md](references/gemini-prompt-template.md) when composing the final prompt.
+5. Preserve the requested tone: preparatory, concise, direct, rigorous, respectful, and evaluative.
+
+## Output Rules
+
+- Return a prompt addressed to Gemini, not the interview-preparation content itself.
+- Make the prompt self-contained: include or clearly reserve space for all relevant CV, vacancy, stage, and context information.
+- Instruct Gemini not to flatter the candidate and not to invent facts.
+- Force Gemini to evaluate evidence from the CV against the vacancy requirements.
+- Ask Gemini to expose gaps, risks, weak answers, likely objections, and concrete ways to improve.
+- Include mock interview behavior: ask one question at a time, wait for the candidate answer, score it, critique it, and demand a stronger version.
+- Prefer Portuguese if the user writes in Portuguese, unless the interview language or user instruction suggests otherwise.
+
+## Quality Bar
+
+The generated Gemini prompt must make Gemini behave like a demanding interview trainer, not a generic career advisor. It should produce specific preparation around the actual role scope, likely questions, answer frameworks, evidence from the candidate's background, red flags, score rubrics, and drills for the current stage.
+````
+
+### job-fit-evaluator
+
+Origem: `$CODEX_HOME/skills/job-fit-evaluator/SKILL.md`
+
+````markdown
+---
+name: job-fit-evaluator
+description: Evaluate whether a job posting, recruiter message, LinkedIn role, or vacancy description is compatible with Ruben's CV, experience, target job profile, preferences, and positioning. Use when asked to assess job fit, match a role to the user's background, identify gaps, decide whether to apply, tailor a CV/profile summary, or explain how well a position aligns with the user's experience.
+---
+
+# Job Fit Evaluator
+
+## Overview
+
+Assess job opportunities against the user's stored CV, target profile, and fit rubric. Produce a practical decision that explains compatibility, gaps, risks, and how to position the user's experience.
+
+## Required References
+
+Before evaluating a role, read:
+
+- `references/cv.md` for the user's background, experience, skills, achievements, education, languages, and constraints.
+- `references/target-profile.md` for desired roles, industries, seniority, work model, compensation, and non-negotiables.
+- `references/evaluation-rubric.md` for scoring rules and output format.
+
+If any reference still contains placeholder text, say what is missing and continue with a provisional assessment using only the available information.
+
+## Workflow
+
+1. Read the required references.
+2. Parse the job post into:
+   - role title and seniority
+   - core responsibilities
+   - required qualifications
+   - preferred qualifications
+   - technical skills, domain skills, languages, and tools
+   - location, remote policy, contract type, compensation, and schedule if present
+3. Compare the role against the CV and target profile.
+4. Score fit using `references/evaluation-rubric.md`.
+5. Return a clear recommendation:
+   - `Strong fit`
+   - `Possible fit`
+   - `Stretch`
+   - `Not recommended`
+6. Ground every major conclusion in evidence from the CV, target profile, or job post. Do not invent experience.
+
+## Evaluation Guidance
+
+- Treat "required" criteria as more important than "preferred" criteria.
+- Distinguish direct experience from adjacent or transferable experience.
+- Consider seniority fit: under-leveling, right-leveling, and over-leveling.
+- Do not over-trust job titles. In technology roles, titles can be disconnected from the real job; evaluate the responsibility mix, scope, stakeholders, outcomes, and operating model first.
+- Flag dealbreakers from the target profile even when the experience match is strong.
+- Apply conservative scoring. Do not inflate the 0-100 score to be agreeable; high scores require direct evidence and no major hard-requirement gaps.
+- Treat mandatory education, credentials, licenses, and background requirements as real constraints. If the requested formation is far from technology, design, product, digital, or exact sciences, apply the rubric's stronger penalty/cap.
+- Call out missing evidence separately from true skill gaps.
+- Be candid but helpful: if the role is weak, explain why and suggest better role keywords or titles.
+- If the user asks in Portuguese, answer in Portuguese. Otherwise, match the language of the user's request.
+
+## Output
+
+Use this concise structure unless the user requests another format:
+
+```markdown
+**Decision:** <Strong fit | Possible fit | Stretch | Not recommended>
+**Fit Score:** <0-100>
+**Confidence:** <High | Medium | Low>
+
+**Why**
+- <Evidence-based reason>
+- <Evidence-based reason>
+
+**Matched Experience**
+- <Job requirement> -> <matching CV evidence>
+
+**Gaps / Risks**
+- <Gap, risk, or missing evidence>
+
+**Score Inhibitors**
+- <Main reasons the score is not higher, especially mandatory education, credentials, seniority, language, tools, or domain gaps>
+
+**Application Strategy**
+- <How to position the user's background>
+- <CV/profile keywords to emphasize>
+
+**Better-Fit Search Terms**
+- <Role titles, keywords, or industries if useful>
+```
+````
+
+### pessoa-due-diligence
+
+Origem: `$CODEX_HOME/skills/pessoa-due-diligence/SKILL.md`
+
+````markdown
+---
+name: pessoa-due-diligence
+description: Levantamento juridico, reputacional e de idoneidade documental de pessoa fisica com base em fontes publicas, oficiais ou autorizadas, reunindo documentos, links, processos, diarios oficiais, registros profissionais, sancoes, certidoes, sinais criminais publicos, informacoes militares publicas quando licitas e evidencias rastreaveis de boa ou ma conduta institucional. Use quando o usuario pedir investigacao juridica, due diligence, background check, "levantar tudo sobre uma pessoa", pesquisar processos, antecedentes, documentos, vinculos publicos, risco criminal, historico militar, certidoes, compliance, OSINT legal, reputacao, idoneidade, "indole" ou relatorio rastreavel sobre uma pessoa identificada ou parcialmente identificada.
+---
+
+# Pessoa Due Diligence
+
+## Overview
+
+Conduzir due diligence de pessoa fisica sem ultrapassar limites legais, eticos ou de privacidade. Priorizar fontes oficiais, registrar evidencias, distinguir homonimos e separar fatos documentados de hipoteses.
+
+## Guardrails
+
+- Trabalhar apenas com dados fornecidos pelo usuario, fontes publicas, bases oficiais, publicacoes legais ou fontes para as quais o usuario declara autorizacao.
+- Nao burlar login, paywall, captcha, termos de uso, sigilo processual, segredo de justica, sistemas internos, bancos vazados ou fontes obtidas de forma ilicita.
+- Nao tentar descobrir ou expor CPF completo, endereco residencial, telefone pessoal, e-mail pessoal, dados de familiares, dados bancarios, prontuario medico, biometria, senhas ou dados sensiveis nao necessarios.
+- Mascarar identificadores sensiveis no relatorio final, salvo se o usuario ja os forneceu e pediu uso operacional: `123.***.***-45`, `***@dominio.com`.
+- Nao afirmar que a pessoa cometeu crime sem condenacao ou documento oficial. Usar linguagem como "consta processo", "ha registro publico", "nao foi localizado registro publico", "pode haver homonimia".
+- Para criminal, militar, seguranca ou antecedentes, limitar-se a registros publicos oficiais, diarios oficiais, tribunais, orgaos de controle, listas oficiais e documentos fornecidos/autorizados.
+- Nao "comprovar indole" como verdade psicologica ou moral. Converter pedidos sobre indole em "evidencias documentais de idoneidade/reputacao", com fontes, limites e contraditorios.
+- Nao produzir score de risco pessoal, perfil psicologico, inferencia de carater, diagnostico, previsao de crime ou conclusao discriminatoria. Usar categorias documentais: `sem achado relevante nas fontes consultadas`, `achado positivo`, `achado de atencao`, `achado critico`, `inconclusivo`.
+- Se a finalidade parecer assedio, vigilancia pessoal, discriminacao, exposicao publica, doxxing ou decisao ilegal sobre emprego/credito/moradia, recusar essa finalidade e oferecer uma versao de compliance/licita e minimizada.
+
+## Intake
+
+Quando a pessoa nao estiver identificada com seguranca, pedir os dados minimos adicionais antes de pesquisar ou antes de concluir:
+
+- Nome completo e grafias alternativas.
+- Pais/estado/cidade provaveis e periodo de interesse.
+- Data de nascimento ou faixa etaria, se o usuario puder fornecer.
+- CPF, RG, OAB, CRM, matricula, nome dos pais ou outro identificador, preferencialmente parcial/mascarado.
+- Finalidade declarada do levantamento e base de autorizacao quando houver dados nao publicos.
+- Escopo desejado: civil, criminal, trabalhista, eleitoral, militar, societario, profissional, midia, sancoes, internacional.
+- Nivel de profundidade: triagem rapida, relatorio completo, certidoes oficiais, ou matriz de idoneidade.
+
+Se houver risco alto de homonimia, continuar a pesquisa, mas marcar cada achado como `confirmado`, `provavel`, `possivel homonimo` ou `descartado`, explicando o criterio.
+
+## Workflow
+
+1. Definir escopo, jurisdicao, finalidade e dados identificadores.
+2. Montar matriz de identidade: nomes, aliases, documentos parciais, localidades, empresas, cargos, registro profissional, servico militar conhecido, datas.
+3. Pesquisar fontes oficiais primeiro. Usar buscas web somente para descobrir paginas oficiais ou noticias relevantes, sempre abrindo e verificando a fonte primaria quando possivel.
+4. Registrar cada achado com URL, orgao/fonte, data de consulta, termos usados, identificadores que conectam o achado a pessoa e nivel de confianca.
+5. Cobrir areas conforme o escopo: processos judiciais, diarios oficiais, certidoes/consultas publicas, registros profissionais, empresas e socios, eleitorais, sancoes/listas oficiais, criminal publico, militar publico, midia confiavel e idoneidade documental.
+6. Consolidar homonimos e conflitos. Nao mesclar pessoas diferentes sem identificador forte.
+7. Classificar cada evidencia como favoravel, neutra, atencao, critica ou inconclusiva, sem transformar isso em julgamento moral absoluto.
+8. Produzir relatorio com sumario executivo, tabela de evidencias, lacunas, riscos, recomendacoes de proximos passos licitos e anexos/links.
+
+## Pesquisa
+
+Ler `references/fontes-brasil.md` quando o caso envolver Brasil ou quando precisar de um mapa de fontes por categoria. Adaptar para outros paises usando a mesma logica: fonte oficial, autoridade competente, rastreabilidade e minimizacao de dados.
+
+Ler `references/idoneidade-fontes.md` quando o usuario pedir indole, idoneidade, reputacao, confiabilidade, "se e boa pessoa", risco de contratar, negociar, emprestar, associar-se, conviver profissionalmente, ou quando o relatorio precisar ir alem de processos judiciais.
+
+Ler `references/modelo-relatorio.md` antes de entregar um relatorio completo ou quando o usuario pedir "documentos, links e processos".
+
+Quando houver HTML salvo do e-SAJ, usar `scripts/esaj_extract.py` para extrair listagem, detalhes, partes e movimentacoes antes de montar a tabela. Exemplo:
+
+```bash
+python scripts/esaj_extract.py caminho/para/tjsp_*.html --json saida.json
+```
+
+### Consultas judiciais e documentos
+
+- Buscar por nome exato, variacoes do nome, CPF parcial quando fornecido, OAB/registro profissional, empresas relacionadas e localidades.
+- Separar areas: civel, criminal, trabalhista, federal, eleitoral, militar, fazenda publica, familia/sucessoes quando publico.
+- Para cada processo, coletar: numero CNJ, tribunal, classe, assunto, partes publicas, movimentacoes relevantes, status, segredo/sigilo quando indicado, link oficial.
+- Nao tentar acessar processo sigiloso ou documentos restritos.
+
+### Criminal
+
+- Priorizar tribunais, diarios oficiais, ministerio publico, policias/listas oficiais, CNJ/BNMP quando publicamente acessivel, listas de procurados oficiais, Interpol e orgaos equivalentes.
+- Diferenciar inquerito, acao penal, medida cautelar, mandado, condenacao, absolvido, arquivado, prescrito e extinto.
+- Nao tratar noticia, boletim nao verificado ou homonimo como antecedentes.
+- Quando nao houver fonte oficial suficiente, escrever "nao foram localizados registros publicos nas fontes consultadas", nunca "nada consta" de forma absoluta.
+
+### Idoneidade e reputacao documental
+
+- Buscar evidencias positivas e negativas. Exemplos positivos: certidoes negativas oficiais, regularidade profissional, ausencia de sancoes em cadastros oficiais consultados, exercicio publico/profissional regular documentado, historico societario sem sancoes localizadas, decisoes favoraveis ou arquivamentos documentados.
+- Exemplos de atencao: execucoes fiscais, inadimplemento judicial, processos repetidos de cobranca, citacoes por edital, sancoes administrativas, inabilitacoes, impedimentos de licitar, condenacoes, mandados, punicoes profissionais, noticias relevantes confirmadas por documentos.
+- Nao concluir "boa indole" ou "ma indole"; concluir apenas "os documentos consultados sustentam/nao sustentam sinais de idoneidade ou risco em X dimensoes".
+- Procurar contraditorios: status atual do processo, arquivamento, extincao, pagamento, acordo, absolvição, prescricao, baixa, recurso, reforma, homonimia.
+- Separar `risco juridico`, `risco financeiro-publico`, `risco reputacional`, `risco profissional/regulatorio`, `risco criminal publico` e `lacunas`.
+
+### Militar
+
+- Consultar apenas informacoes publicas: Justica Militar, STM/TJM, diarios oficiais, nomeacoes, promocoes, concursos, boletins publicados, condecoracoes, processos administrativos publicos, curriculos oficiais e documentos fornecidos pelo usuario.
+- Nao buscar dados internos de quartel, ficha funcional reservada, servico obrigatorio individual, movimentacoes sensiveis, lotacao atual sensivel ou dados de seguranca sem fonte publica/autorizacao.
+- Quando houver possivel vinculo militar, indicar orgao, posto/cargo se publico, periodo documentado e fonte.
+
+## Output
+
+Entregar em portugues, salvo pedido contrario. Usar esta estrutura:
+
+- Escopo e dados usados.
+- Sumario executivo com nivel geral de confianca.
+- Identidade e criterios de desambiguacao.
+- Tabela de achados: categoria, fato documentado, fonte, link, data de consulta, confianca, observacoes.
+- Processos e documentos localizados.
+- Matriz de idoneidade documental quando pedida: dimensao, evidencias favoraveis, evidencias de atencao, lacunas, leitura cautelosa.
+- Achados criminais publicos, com cautela juridica.
+- Achados militares publicos, com cautela de seguranca.
+- Lacunas, fontes indisponiveis e proximos passos licitos.
+- Aviso: levantamento informativo, nao certidao oficial nem parecer juridico.
+
+## Quality Bar
+
+- Preferir resultado menor e bem comprovado a lista longa de homonimos.
+- Incluir links diretos e datas de consulta.
+- Sinalizar limitações: sites fora do ar, bloqueios, necessidade de certidao oficial, dados insuficientes, jurisdicoes nao pesquisadas.
+- Quando usar noticias ou fontes secundarias, indicar que sao secundarias e buscar confirmacao oficial.
+- Nao deixar achado negativo sem contexto processual atual quando a fonte permitir verificar movimentacoes, status, extincao, arquivamento, absolvição ou recurso.
+- Fazer perguntas de follow-up quando o proximo passo depender de dado identificador, jurisdicao ou autorizacao.
+````
+
+### prd-to-codex-prompt
+
+Origem: `$CODEX_HOME/skills/prd-to-codex-prompt/SKILL.md`
+
+````markdown
+---
+name: prd-to-codex-prompt
+description: Create a clear, complete initial prompt for OpenAI Codex from a Product Requirements Document (PRD). Use when the user wants to turn a PRD, product spec, feature brief, ticket, or requirements document into a Codex-ready prompt for implementation, refactoring, debugging, review, testing, or planning. The skill must require the user to provide or attach a PRD before drafting the prompt.
+---
+
+# PRD to Codex Prompt
+
+## Overview
+
+Generate an initial OpenAI Codex prompt that is understandable, complete, actionable, and faithful to the user's PRD. Do not produce the Codex prompt until a PRD has been provided in the conversation or as an attached/local file.
+
+## Required PRD Gate
+
+Before drafting any prompt, verify that a PRD is available.
+
+- If no PRD is present, ask the user to paste or attach the PRD. Stop there.
+- If the user gives only a vague idea, roadmap item, or one-line feature request, ask for a PRD or a PRD-like brief with goals, scope, requirements, constraints, and acceptance criteria. Stop there.
+- If a PRD is attached or pasted, treat it as supplied and continue.
+- If the PRD is incomplete, continue only when enough implementation direction exists. Capture missing information as questions or assumptions inside the generated prompt.
+
+Suggested request when the PRD is missing:
+
+```text
+Para gerar um prompt inicial completo para o Codex, preciso primeiro do PRD. Cole aqui o PRD ou anexe o arquivo, incluindo objetivo, escopo, requisitos, criterios de aceite, restricoes e contexto tecnico quando houver.
+```
+
+## Workflow
+
+1. Read the PRD fully before drafting.
+2. Extract the product goal, user problem, target users, required behavior, non-goals, dependencies, constraints, edge cases, acceptance criteria, and rollout or testing expectations.
+3. Infer the likely Codex task type: build, modify, debug, refactor, test, review, document, or investigate.
+4. Ask at most three clarifying questions only when the PRD leaves a decision that would materially change the implementation. If the prompt can proceed with reasonable assumptions, include those assumptions in the prompt instead.
+5. Generate a single initial prompt for a new Codex thread. The prompt should be self-contained and written so another Codex instance can begin useful work without rereading the full conversation.
+
+## Prompt Quality Bar
+
+The generated Codex prompt must:
+
+- State the desired outcome plainly.
+- Include relevant PRD context without dumping unnecessary prose.
+- Separate must-haves from nice-to-haves.
+- Preserve named requirements, acceptance criteria, metrics, personas, platforms, APIs, data shapes, and constraints from the PRD.
+- Tell Codex what to inspect first when a repo is involved.
+- Define expected deliverables, verification steps, and any files or areas that should be avoided.
+- Include open questions and assumptions when the PRD is ambiguous.
+- Avoid inventing requirements that are not in the PRD.
+- Use the same language as the user unless they request another language.
+
+## Output Format
+
+When the PRD is available, respond with:
+
+```markdown
+Aqui esta um prompt inicial para usar com o Codex:
+
+[prompt in a fenced text block]
+
+Pontos que talvez voce queira confirmar:
+- [only include if there are meaningful uncertainties]
+```
+
+Inside the fenced prompt, use this structure unless the PRD calls for a different shape:
+
+```text
+You are OpenAI Codex working in this repository.
+
+Goal
+[One concise paragraph describing the outcome.]
+
+Context From The PRD
+- [Condensed product/user/business context.]
+
+Scope
+- Must do: [...]
+- Out of scope: [...]
+
+Functional Requirements
+- [...]
+
+Non-Functional Requirements And Constraints
+- [...]
+
+Acceptance Criteria
+- [...]
+
+Implementation Guidance
+- Start by inspecting [...]
+- Follow existing project patterns.
+- Keep changes scoped to [...]
+- Do not [...]
+
+Verification
+- Run or add [...]
+- Manually check [...]
+
+Deliverables
+- [...]
+
+Open Questions Or Assumptions
+- [...]
+```
+
+## Handling Weak PRDs
+
+If the PRD lacks implementation detail but still defines the product outcome, generate a prompt that instructs Codex to inspect the repo and ask for clarification before making high-risk decisions. If the PRD lacks the actual product outcome, ask the user for a fuller PRD instead of generating the prompt.
+````
+
+### tailor-cv-to-job
+
+Origem: `$CODEX_HOME/skills/tailor-cv-to-job/SKILL.md`
+
+````markdown
+---
+name: tailor-cv-to-job
+description: Adapt an existing editable CV/resume to a specific job description while preserving the original document formatting and generating a PDF. Use when the user sends a vacancy/job description and asks to tailor, reescrever, otimizar para ATS, adaptar CV/curriculo/resume, extrair palavras-chave da vaga, update the Objective/Objetivo section, or create a PDF named for the candidate and job title without inventing experience or changing real job history. If the only source is PDF, use this skill only to save/analyze the original and request an editable source before producing the final formatted CV.
+---
+
+# Tailor CV To Job
+
+## Purpose
+
+Adapt the user's original CV to a job description with strict factual integrity, ATS-friendly language, and the same visual formatting as the source CV. The output must be an edited CV file plus a PDF named `CV [nome completo] - [cargo da vaga].pdf`.
+
+## Non-Negotiable Rules
+
+- Do not invent employers, projects, metrics, tools, domains, responsibilities, certifications, education, dates, or achievements.
+- Do not change held job titles. Only use a close synonym/SEO variant when it preserves the same meaning and seniority.
+- Do not mention the target company in the CV unless the original CV already mentions it as factual history.
+- Do not add flattery, motivation, or "quero trabalhar na empresa" language.
+- Preserve the original CV's formatting, layout, sections, order, typography, spacing, colors, and page structure as strictly as the editable source allows.
+- Do not rewrite final CV content by editing fixed-position PDF text streams, PDF glyph codes, `TJ` arrays, or coordinates. PDF text does not reflow and can clip, overlap, lose indentation, or break ATS extraction.
+- Prefer concise, human, ATS-friendly Portuguese or English matching the CV language. Avoid common AI phrasing such as "profissional apaixonado", "historico comprovado", "ambiente dinamico", "solida experiencia em impulsionar", "alavancar sinergias", or exaggerated superlatives.
+- Keep the "Objetivo" section to the target job title/role only, or a very short title phrase if the original layout requires a sentence.
+- If an instruction conflicts with factual accuracy or formatting preservation, factual accuracy and formatting preservation win.
+
+## Required Inputs
+
+Use the job description supplied by the user and the original CV file supplied or clearly present in the project. Require an editable source file (`.docx`, `.odt`, `.rtf`) to produce the final formatted CV and PDF. A PDF-only source may be saved and analyzed for text/keywords, but must not be rewritten as the final artifact when the user requires strict formatting preservation.
+
+If only a PDF exists, stop after saving/analyzing it and ask for the editable original. Offer a separate "reconstructed layout" path only if the user explicitly accepts that it will not strictly preserve the original formatting.
+
+For Ruben's CV work in this project, use `C:\Users\ruben\Documents\New project 3\cv-original\CV Rubens - Tech Manager.odt` as the default original CV source when no other editable CV file is explicitly supplied. Keep this file unchanged and edit only a copied output file.
+
+Ruben's project CV base must preserve these current additions in every tailored CV unless the user explicitly asks to remove them:
+- In "Habilidades e Competencias", keep `Claude Code`, `OpenAi Codex`, and `Agent Skills` in the AI/tools line.
+- In "Formacao Complementar", keep `Claude Code in Action - Anthropic`, `Introduction to Agent Skills - Anthropic`, `Introduction to Model Context Protocol - Anthropic`, and `Buiding with the Claude API - Anthropic` in the same one-course-per-line style as the existing section.
+- Do not reinsert `Idiomas` or `Ingles` unless the user explicitly asks.
+
+If multiple possible CV files exist, ask the user which one is the source.
+
+## Workflow
+
+1. Inspect the source CV.
+   - Identify language, candidate full name, sections, Objective/Objetivo, work history, education, skills, certifications, and formatting constraints.
+   - Make a copy before editing. Never overwrite the original CV.
+   - If the source is only PDF and no editable counterpart exists, copy it into the project, extract/analyze text if useful, then stop and request the editable source. Do not generate a final tailored PDF from fixed PDF coordinates.
+
+2. Analyze the job description.
+   - Extract target title, seniority, domain, must-have skills, nice-to-have skills, tools/technologies, responsibilities, language requirements, certifications, and recurring ATS keywords.
+   - Create a short internal "evidence ledger": for each high-priority keyword, mark whether it is explicitly present in the CV, strongly supported by existing experience, weakly supported, or unsupported.
+
+3. Decide what can be changed.
+   - Use explicit or strongly supported evidence freely.
+   - Use weakly supported evidence only as broad positioning, not as a claimed hands-on achievement.
+   - Omit unsupported keywords. Do not force every job keyword into the CV.
+   - Keep original dates, employers, roles, education, and certifications unchanged unless the user explicitly supplies a correction.
+
+4. Rewrite conservatively.
+   - Update "Objetivo" to the target job title from the vacancy, without company name.
+   - Reorder or tune existing skills to emphasize matching core competencies.
+   - Rewrite bullets to foreground relevant responsibilities and tools already present in the CV.
+   - Preserve the candidate's real seniority and scope. Do not inflate leadership, architecture, management, budget, or stakeholder ownership.
+   - Prefer direct nouns and verbs used in the vacancy. Keep language natural, specific, and short.
+
+5. Preserve formatting.
+   - Edit the existing document structure in place. Do not rebuild the CV from a blank template.
+   - Reuse existing styles, paragraph marks, tables, headers/footers, text boxes, and section spacing.
+   - When using DOCX tools, avoid operations that flatten runs or remove style metadata. If replacing text programmatically would damage formatting, use the app-native editor or a safer manual replacement strategy.
+   - Keep replacement text within the original section's layout capacity. Shorten wording before allowing text to overflow, clip, overlap, or remove indentation.
+   - After editing, open or inspect the resulting document enough to verify page count, visible sections, indentation, line wrapping, and no clipped/overlapping text. If visual validation is not possible, say so and do not claim strict formatting preservation.
+
+6. Export the PDF.
+   - Use `scripts/convert_docx_to_pdf.py` when the edited source is DOCX, ODT, or RTF and LibreOffice/OpenOffice/soffice is available.
+   - Name the PDF exactly `CV [nome completo] - [cargo da vaga].pdf`, with filesystem-unsafe characters removed from the title.
+   - Return the path to the final PDF and the edited source file only after layout validation passes. Include a brief note of any unsupported job keywords intentionally omitted.
+
+## Script
+
+`scripts/convert_docx_to_pdf.py` converts DOCX/ODT/RTF to PDF using LibreOffice/OpenOffice/soffice and optionally renames the output:
+
+```bash
+python scripts/convert_docx_to_pdf.py "path/to/edited.odt" --output-dir "path/to/output" --pdf-name "CV Nome Completo - Cargo.pdf"
+```
+
+If conversion fails because LibreOffice is missing, use an available app-native export method or tell the user exactly what dependency is missing.
+
+## Final Response
+
+Keep the final response short. Provide:
+
+- PDF path.
+- Edited source path.
+- Core competencies targeted.
+- Any job keywords not used because they were unsupported by the original CV.
+- If blocked by PDF-only input, say that the original PDF was saved/analyzed and ask for the editable CV source instead of returning a flawed final PDF.
+````
 

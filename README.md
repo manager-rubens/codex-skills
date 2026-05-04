@@ -1,26 +1,32 @@
 # Codex Skills
 
-Inventario organizado das skills encontradas neste ambiente local do Codex.
+Catalogo das skills pessoais criadas neste ambiente local do Codex.
 
-Generated on: 2026-05-04 (America/Sao_Paulo)
+Gerado em: 2026-05-04 (America/Sao_Paulo)
 
-## Snapshot
+## Escopo
 
-| Metric | Count |
-| --- | ---: |
-| Discovered `SKILL.md` files | 73 |
-| Available in the current Codex session | 70 |
-| Present on disk only | 3 |
+Este repositorio contem somente skills criadas pelo usuario em `$CODEX_HOME/skills`.
 
-## Files
+Nao inclui:
 
-- `docs/skills.md`: human-readable catalog grouped by source/plugin.
-- `data/skills.json`: machine-readable inventory with roots, counts, and skill metadata.
-- `data/skills.csv`: spreadsheet-friendly export.
-- `scripts/generate-inventory.ps1`: repeatable generator for refreshing this repo.
+- skills originais do Codex em `$CODEX_HOME/skills/.system`
+- skills de plugins/cache, como Figma, GitHub, Vercel, Browser Use ou Gmail
 
-## Notes
+## Skills catalogadas
 
-- This repository lists metadata only. It intentionally does not copy full `SKILL.md` instruction bodies.
-- `available_in_session` means the skill was advertised as available to Codex in the current session.
-- `present_on_disk_only` means the `SKILL.md` file exists locally but was not advertised in the current session list.
+- [company-jobs](skills/company-jobs/SKILL.md)
+- [curadoria-eventos](skills/curadoria-eventos/SKILL.md)
+- [gemini-interview-prep-prompt](skills/gemini-interview-prep-prompt/SKILL.md)
+- [job-fit-evaluator](skills/job-fit-evaluator/SKILL.md)
+- [pessoa-due-diligence](skills/pessoa-due-diligence/SKILL.md)
+- [prd-to-codex-prompt](skills/prd-to-codex-prompt/SKILL.md)
+- [tailor-cv-to-job](skills/tailor-cv-to-job/SKILL.md)
+
+## Arquivos
+
+- `skills/<nome>/SKILL.md`: conteudo completo de cada skill pessoal.
+- `docs/skills.md`: catalogo legivel com os conteudos completos reunidos.
+- `data/skills.json`: inventario estruturado com metadados e checksums.
+- `data/skills.csv`: exportacao tabular com metadados.
+- `scripts/generate-personal-skills.ps1`: script para atualizar este catalogo.
