@@ -1,6 +1,6 @@
 ---
 name: company-jobs
-description: Find current job openings from a company's official website or careers page. Use when the user asks to read a company site, careers page, ATS board, or recruitment page and return all available vacancies, roles, jobs, positions, openings, or "vagas"; also use when the user provides only a company name and wants current hiring opportunities.
+description: Find current job openings from official company careers surfaces and build single-company or aggregated HTML job digests from primary sources. Use when Codex needs to search company careers pages or ATS boards, collect and normalize current openings, package them for a company-jobs or job-alerts digest, or deliver the digest through Apps Script and Gmail relay without leaving raw payload emails visible in the inbox.
 ---
 
 # Company Jobs
@@ -8,6 +8,8 @@ description: Find current job openings from a company's official website or care
 ## Overview
 
 Find and return current vacancies from a company's official hiring surface. Prefer direct company or ATS sources over aggregators, verify information with live browsing when possible, and cite every source used.
+
+When the requested output is a jobs digest, keep the collection, normalization, delivery, and inbox-cleanup steps in the same flow so the recipient ends up with the final formatted HTML email only.
 
 ## Workflow
 
@@ -23,18 +25,38 @@ Find and return current vacancies from a company's official hiring surface. Pref
 python <skill-dir>/scripts/job_scraper.py "https://example.com/careers" --max-pages 40 --output markdown
 ```
 
-   - If the page is JavaScript-heavy, protected by consent UI, or incomplete, use browser/web tools to inspect the rendered page and linked ATS endpoints.
-   - Read pagination, departments, location filters, and remote/hybrid filters. Do not assume the first page is complete.
+   - If the page is JavaScript-heavy, protected by consent UI, or incomplete, use browser or web tools to inspect the rendered page and linked ATS endpoints.
+   - Read pagination, departments, location filters, and remote or hybrid filters. Do not assume the first page is complete.
 
 3. Normalize each role.
-   - Capture title, location or remote status, department/team when available, employment type when available, and the direct application/job-detail URL.
+   - Capture title, location or remote status, department or team when available, employment type when available, and the direct application or job-detail URL.
    - Preserve exact public-facing titles.
-   - Exclude expired, closed, speculative, or "general application/talent pool" roles unless the user asks for them.
+   - Deduplicate repeated roles across pagination, alternate URLs, or ATS detail pages.
+   - Exclude expired, closed, speculative, or general-application or talent-pool roles unless the user asks for them.
+   - If a public detail page is incomplete or unavailable, say that explicitly in `note` or `risk` and lower confidence instead of guessing.
 
-4. Return the result in the user's language.
-   - Include the company/source name and access date.
-   - If roles were found, provide a compact table.
-   - If none were found, say which official pages were checked and whether the company has no listed vacancies or the site could not be read fully.
+4. Package the result.
+   - For a plain jobs answer, return a compact table in the user's language.
+   - For digests, normalize each kept role into a delivery object with:
+     - `title`
+     - `company`
+     - `location`
+     - `model`
+     - `source`
+     - `score`
+     - `decision`
+     - `confidence`
+     - `why`
+     - `risk`
+     - `url`
+   - Sort valid roles by score descending.
+   - Put the top roles in `jobs` and the remaining valid roles in `otherJobs`.
+
+5. Deliver the digest when asked.
+   - Use `template: "job-alerts"` for aggregated or multi-company digests.
+   - Use `template: "company-jobs"` for single-company digests.
+   - Read `references/digest-delivery.md` before sending any Apps Script or Gmail-based digest.
+   - If manual HTML rendering is truly required, use `assets/job-fit-digest-template.html` as the canonical fallback layout instead of inventing a new email shape.
 
 ## CV Handoff Notes
 
@@ -59,13 +81,22 @@ Fontes: <career page>, <ATS page if separate>
 Observacoes: <pagination/rendering limitations, if any>
 ```
 
+For email digests, keep the payload and delivery rules in `references/digest-delivery.md`.
+
 ## Source Handling
 
 - Browse for current data; job listings change frequently.
 - Cite the exact pages checked.
 - If using search results to discover the careers page, still validate against the official page.
-- Do not log in, bypass access controls, solve CAPTCHAs, or scrape private/internal job systems.
+- Do not log in, bypass access controls, solve CAPTCHAs, or scrape private or internal job systems.
 - Respect rate limits. Keep crawls small and targeted.
+
+## Delivery Guardrails
+
+- Never replace a requested formatted digest with a simplified plain-text fallback.
+- Never leave relay payload JSON or temporary helper emails visible in the recipient inbox once the final digest exists.
+- If the Apps Script Web App POST fails, use the Gmail relay flow from `references/digest-delivery.md`, verify the final HTML digest from `Ruben Job Fit Alerts`, and archive the relay or helper emails so only the final digest remains in inbox.
+- Keep JSON and payload text in UTF-8. Do not replace accents with HTML entities in the payload.
 
 ## Script Notes
 
