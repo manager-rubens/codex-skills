@@ -2,7 +2,7 @@
 
 Catalogo das skills pessoais criadas neste ambiente local do Codex.
 
-Gerado em: 2026-05-04 (America/Sao_Paulo)
+Gerado em: 2026-05-06 (America/Sao_Paulo)
 
 ## Escopo
 
@@ -21,6 +21,7 @@ Nao inclui:
 - [job-fit-evaluator](skills/job-fit-evaluator/SKILL.md)
 - [pessoa-due-diligence](skills/pessoa-due-diligence/SKILL.md)
 - [prd-to-codex-prompt](skills/prd-to-codex-prompt/SKILL.md)
+- [skill-usage-auditor](skills/skill-usage-auditor/SKILL.md)
 - [tailor-cv-to-job](skills/tailor-cv-to-job/SKILL.md)
 
 ## Arquivos
