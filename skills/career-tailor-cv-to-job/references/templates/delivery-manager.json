@@ -1,0 +1,57 @@
+{
+  "role_family": "delivery-manager",
+  "use_when_job_mentions": [
+    "delivery manager",
+    "gerente de entregas",
+    "service delivery",
+    "entrega de valor",
+    "previsibilidade",
+    "qualidade",
+    "throughput",
+    "lead time",
+    "cycle time",
+    "eficiencia operacional"
+  ],
+  "target_titles": [
+    "Delivery Manager",
+    "Gerente de Entregas",
+    "Gerente de Entregas de TI"
+  ],
+  "prioritize_if_supported": [
+    "entrega de valor",
+    "previsibilidade",
+    "qualidade",
+    "KPIs",
+    "lead time",
+    "cycle time",
+    "throughput",
+    "melhoria continua",
+    "automacao de fluxo",
+    "stakeholders e clientes",
+    "squads multidisciplinares"
+  ],
+  "compact_phrases": [
+    "gestao de entregas",
+    "KPIs e metricas de fluxo",
+    "previsibilidade e qualidade",
+    "riscos e impedimentos",
+    "stakeholders e clientes",
+    "melhoria continua"
+  ],
+  "rewrite_guidance": [
+    "Enfatizar fluxo, previsibilidade, qualidade, riscos, impedimentos e comunicacao com stakeholders.",
+    "Preservar metricas reais existentes, como reducao de lead time, sem criar novas metas ou indicadores.",
+    "Nao alegar SLA, AMS, margem, receita ou grandes contas sem evidencia explicita."
+  ],
+  "omit_unless_explicit": [
+    "SLA",
+    "AMS",
+    "margem",
+    "receita",
+    "forecast",
+    "rentabilidade",
+    "upsell",
+    "cross-sell",
+    "grandes contas"
+  ]
+}

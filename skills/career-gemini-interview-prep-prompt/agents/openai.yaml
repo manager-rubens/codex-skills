@@ -1,0 +1,4 @@
+interface:
+  display_name: "career-gemini-interview-prep-prompt"
+  short_description: "Prompt rigoroso para treino de entrevistas"
+  default_prompt: "Use $career-gemini-interview-prep-prompt para criar um prompt de preparacao de entrevista para Gemini a partir do CV, vaga e etapa do processo."

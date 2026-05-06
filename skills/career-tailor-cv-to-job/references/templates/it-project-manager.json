@@ -1,0 +1,55 @@
+{
+  "role_family": "it-project-manager",
+  "use_when_job_mentions": [
+    "gerente de projetos",
+    "project manager",
+    "it project manager",
+    "pmo",
+    "cronograma",
+    "riscos",
+    "escopo",
+    "stakeholders",
+    "governanca",
+    "metodologias ageis e hibridas"
+  ],
+  "target_titles": [
+    "IT Project Manager",
+    "Gerente de Projetos Senior",
+    "Gerente de Projetos de TI"
+  ],
+  "prioritize_if_supported": [
+    "gestao de projetos",
+    "governanca",
+    "riscos e impedimentos",
+    "cronograma e prioridades",
+    "stakeholders executivos",
+    "KPIs",
+    "metricas de fluxo",
+    "transformacao digital",
+    "times multidisciplinares",
+    "metodos ageis e hibridos"
+  ],
+  "compact_phrases": [
+    "gestao de projetos de TI",
+    "governanca e stakeholders",
+    "KPIs e metricas de fluxo",
+    "riscos e impedimentos",
+    "transformacao digital",
+    "times multidisciplinares"
+  ],
+  "rewrite_guidance": [
+    "Enfatizar alinhamento, previsibilidade, governanca, riscos e comunicacao executiva.",
+    "Usar linguagem de projeto somente onde houver evidencia; nao inventar budget, contratos ou P&L.",
+    "Manter realizacoes tecnicas como suporte a entrega e decisao, nao como escopo gerencial inventado."
+  ],
+  "omit_unless_explicit": [
+    "PMP",
+    "PMBOK formal",
+    "budget",
+    "P&L",
+    "gestao financeira",
+    "contratos",
+    "fornecedores",
+    "SLA"
+  ]
+}

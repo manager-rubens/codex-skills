@@ -1,0 +1,4 @@
+interface:
+  display_name: "research-curadoria-eventos"
+  short_description: "Busca eventos e gera PDF visual"
+  default_prompt: "Use $research-curadoria-eventos para encontrar eventos em Sao Paulo neste final de semana e gerar um PDF bonito com imagens das fontes."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "codex-ops-publish-local-skills-catalog"
+  short_description: "Sync local skills to the GitHub catalog"
+  default_prompt: "Use $codex-ops-publish-local-skills-catalog to compare my local Codex skills with the GitHub catalog and publish the safe catalog updates."

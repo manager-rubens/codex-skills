@@ -1,0 +1,4 @@
+interface:
+  display_name: "career-job-fit-evaluator"
+  short_description: "Compare job posts against your CV and goals"
+  default_prompt: "Use $career-job-fit-evaluator to assess whether this job posting matches my experience and target profile."

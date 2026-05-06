@@ -3,15 +3,64 @@
     "timezone":  "America/Sao_Paulo",
     "scope":  "Only user-created Codex skills from $CODEX_HOME/skills, excluding .system and plugin caches.",
     "totals":  {
-                   "user_created_skills":  8
+                   "user_created_skills":  18
                },
     "skills":  [
                    {
+                       "name":  "career-company-jobs",
+                       "description":  "Find current job openings from official company careers surfaces and build single-company or aggregated HTML job digests from primary sources. Use when Codex needs to search company careers pages or ATS boards, collect and normalize current openings, package them for a career-company-jobs or job-alerts digest, or deliver the digest through Apps Script and Gmail relay without leaving raw payload emails visible in the inbox.",
+                       "source_path":  "$CODEX_HOME/skills/career-company-jobs/SKILL.md",
+                       "repository_path":  "skills/career-company-jobs/SKILL.md",
+                       "sha256":  "a541825187c833ca58bba553bc887067e6c3e923a8854b9cf6ade3b4de44e676"
+                   },
+                   {
+                       "name":  "career-gemini-interview-prep-prompt",
+                       "description":  "Create a ready-to-paste Gemini prompt that turns Gemini into a rigorous, concise, respectful interview preparation coach and evaluator. Use when the user provides a professional CV/resume, LinkedIn/profile information, job description, extra context, hiring-process stage, recruiter notes, interview format, or asks to generate a prompt for Gemini to prepare someone for a job interview, mock interview, technical interview, HR screening, hiring-manager conversation, case interview, panel interview, or final interview.",
+                       "source_path":  "$CODEX_HOME/skills/career-gemini-interview-prep-prompt/SKILL.md",
+                       "repository_path":  "skills/career-gemini-interview-prep-prompt/SKILL.md",
+                       "sha256":  "80a798687c23f785f3ce834e20707ae7117a70fd44147906e5aabb5880ae8ad6"
+                   },
+                   {
+                       "name":  "career-job-fit-evaluator",
+                       "description":  "Evaluate whether a job posting, recruiter message, LinkedIn role, or vacancy description is compatible with Ruben\u0027s CV, experience, target job profile, preferences, and positioning. Use when asked to assess job fit, match a role to the user\u0027s background, identify gaps, decide whether to apply, tailor a CV/profile summary, or explain how well a position aligns with the user\u0027s experience.",
+                       "source_path":  "$CODEX_HOME/skills/career-job-fit-evaluator/SKILL.md",
+                       "repository_path":  "skills/career-job-fit-evaluator/SKILL.md",
+                       "sha256":  "b5d5306e3b5a9dba65a42a0d0bcd5897b239d77a919e49c0586beb367278561e"
+                   },
+                   {
+                       "name":  "career-salary-market-research",
+                       "description":  "Research current salary ranges for a job position by company, role/title, contract type, and market using Glassdoor as the priority source and Michael Page as a secondary benchmark. Use when the user asks for salario, salary, remuneracao, compensation, media salarial, Glassdoor salary, Michael Page salary guide, or wants monthly and annual salary estimates with sources, company-name ambiguity checks, fallback to comparable companies, and a confidence level.",
+                       "source_path":  "$CODEX_HOME/skills/career-salary-market-research/SKILL.md",
+                       "repository_path":  "skills/career-salary-market-research/SKILL.md",
+                       "sha256":  "1775f89fd18b52255b4e0d3530ac263167540ea4c4df5b873f072c80f66a6d97"
+                   },
+                   {
+                       "name":  "career-tailor-cv-to-job",
+                       "description":  "Adapt an existing editable CV/resume to a specific job description while preserving the original document formatting and generating a PDF. Use when the user sends a vacancy/job description and asks to tailor, reescrever, otimizar para ATS, adaptar CV/curriculo/resume, extrair palavras-chave da vaga, update the Objective/Objetivo section, or create a PDF named for the candidate and job title without inventing experience or changing real job history. If the only source is PDF, use this skill only to save/analyze the original and request an editable source before producing the final formatted CV.",
+                       "source_path":  "$CODEX_HOME/skills/career-tailor-cv-to-job/SKILL.md",
+                       "repository_path":  "skills/career-tailor-cv-to-job/SKILL.md",
+                       "sha256":  "800c59727dcfed8f93b9ad1709bb448808149229f7adf2817917b37b1ddfe3fe"
+                   },
+                   {
+                       "name":  "codex-ops-publish-local-skills-catalog",
+                       "description":  "Compare user-created local Codex skills in $CODEX_HOME/skills with the GitHub catalog repository, synchronize changed skill folders and generated catalog files, validate the result, and publish safe updates to GitHub. Use when the user asks to varrer, sincronizar, comparar, atualizar, publicar, pushar, or catalogar local skills in manager-rubens/codex-skills or another personal skills catalog repository.",
+                       "source_path":  "$CODEX_HOME/skills/codex-ops-publish-local-skills-catalog/SKILL.md",
+                       "repository_path":  "skills/codex-ops-publish-local-skills-catalog/SKILL.md",
+                       "sha256":  "be95f876486a0c54aa5c5071619030b4bf480b26c6cf0e58b2920eece70a6ea8"
+                   },
+                   {
+                       "name":  "codex-ops-skill-usage-auditor",
+                       "description":  "Audit how a Codex skill was used in a conversation or transcript, mapping invoked skills, shell/tool commands, app/browser/web calls, file edits, procedures performed, repeated steps, friction points, and concrete opportunities to improve the skill workflow. Use when the user asks to audit, review, varrer, analisar, or mapear uso de skill; list commands or procedures used by a skill; reduce repetitive work after a skill run; or turn a conversation into skill improvements.",
+                       "source_path":  "$CODEX_HOME/skills/codex-ops-skill-usage-auditor/SKILL.md",
+                       "repository_path":  "skills/codex-ops-skill-usage-auditor/SKILL.md",
+                       "sha256":  "66cf59b4274be774c058e6f3d2877c5ef7d3bb1b43a766ac813bd0af57af661d"
+                   },
+                   {
                        "name":  "company-jobs",
-                       "description":  "Find current job openings from a company\u0027s official website or careers page. Use when the user asks to read a company site, careers page, ATS board, or recruitment page and return all available vacancies, roles, jobs, positions, openings, or \"vagas\"; also use when the user provides only a company name and wants current hiring opportunities.",
+                       "description":  "Find current job openings from official company careers surfaces and build single-company or aggregated HTML job digests from primary sources. Use when Codex needs to search company careers pages or ATS boards, collect and normalize current openings, package them for a company-jobs or job-alerts digest, or deliver the digest through Apps Script and Gmail relay without leaving raw payload emails visible in the inbox.",
                        "source_path":  "$CODEX_HOME/skills/company-jobs/SKILL.md",
                        "repository_path":  "skills/company-jobs/SKILL.md",
-                       "sha256":  "1ac04107f1d3b56f680ee05de90414165db09f176c73962d2fb72e97d0c36cee"
+                       "sha256":  "0cf180a1a9ae7e348e615f36c090ee0768f991987bb906f6fefd232f19963351"
                    },
                    {
                        "name":  "curadoria-eventos",
@@ -25,7 +74,7 @@
                        "description":  "Create a ready-to-paste Gemini prompt that turns Gemini into a rigorous, concise, respectful interview preparation coach and evaluator. Use when the user provides a professional CV/resume, LinkedIn/profile information, job description, extra context, hiring-process stage, recruiter notes, interview format, or asks to generate a prompt for Gemini to prepare someone for a job interview, mock interview, technical interview, HR screening, hiring-manager conversation, case interview, panel interview, or final interview.",
                        "source_path":  "$CODEX_HOME/skills/gemini-interview-prep-prompt/SKILL.md",
                        "repository_path":  "skills/gemini-interview-prep-prompt/SKILL.md",
-                       "sha256":  "d71668b0ed68dcd3f4ddeffbb7c53a3716523de8556a085b993c9828c1bafebc"
+                       "sha256":  "ca8935aebb6a1f9acccc1b68dcacaf1a67e7cf9527e654fafcea4882eb1158ee"
                    },
                    {
                        "name":  "job-fit-evaluator",
@@ -47,6 +96,27 @@
                        "source_path":  "$CODEX_HOME/skills/prd-to-codex-prompt/SKILL.md",
                        "repository_path":  "skills/prd-to-codex-prompt/SKILL.md",
                        "sha256":  "7cb6b5269726d00faa5f735701866a45af9e9e8d5ef399ff076519b9c4107f6b"
+                   },
+                   {
+                       "name":  "product-dev-prd-to-codex-prompt",
+                       "description":  "Create a clear, complete initial prompt for OpenAI Codex from a Product Requirements Document (PRD). Use when the user wants to turn a PRD, product spec, feature brief, ticket, or requirements document into a Codex-ready prompt for implementation, refactoring, debugging, review, testing, or planning. The skill must require the user to provide or attach a PRD before drafting the prompt.",
+                       "source_path":  "$CODEX_HOME/skills/product-dev-prd-to-codex-prompt/SKILL.md",
+                       "repository_path":  "skills/product-dev-prd-to-codex-prompt/SKILL.md",
+                       "sha256":  "3dc9ff173f12430bb89e8e35e1c7447f4d7f1b218ad8bcffcd49e7b947c1a3e9"
+                   },
+                   {
+                       "name":  "research-curadoria-eventos",
+                       "description":  "Buscar, curar e retornar eventos atuais para uma cidade usando fontes oficiais, APIs, portais locais, Instagram/redes sociais e inteligencia de eventos, com opcao de gerar PDF bonito com imagem de fonte para cada evento. Use quando o usuario pedir eventos, agenda cultural, shows, gastronomia, eventos corporativos, eventos gratuitos, programacao de fim de semana, o que fazer, roles, destaques por data, periodo, categoria, bairro, ponto turistico ou cidade, ou quando pedir um PDF/relatorio visual da agenda.",
+                       "source_path":  "$CODEX_HOME/skills/research-curadoria-eventos/SKILL.md",
+                       "repository_path":  "skills/research-curadoria-eventos/SKILL.md",
+                       "sha256":  "ab8404d8de3e4838b0e560ee9105a9949a530e40aae73eba4fbbe4c02f1673f1"
+                   },
+                   {
+                       "name":  "research-pessoa-due-diligence",
+                       "description":  "Levantamento juridico, reputacional e de idoneidade documental de pessoa fisica com base em fontes publicas, oficiais ou autorizadas, reunindo documentos, links, processos, diarios oficiais, registros profissionais, sancoes, certidoes, sinais criminais publicos, informacoes militares publicas quando licitas e evidencias rastreaveis de boa ou ma conduta institucional. Use quando o usuario pedir investigacao juridica, due diligence, background check, \"levantar tudo sobre uma pessoa\", pesquisar processos, antecedentes, documentos, vinculos publicos, risco criminal, historico militar, certidoes, compliance, OSINT legal, reputacao, idoneidade, \"indole\" ou relatorio rastreavel sobre uma pessoa identificada ou parcialmente identificada.",
+                       "source_path":  "$CODEX_HOME/skills/research-pessoa-due-diligence/SKILL.md",
+                       "repository_path":  "skills/research-pessoa-due-diligence/SKILL.md",
+                       "sha256":  "899d6c12a3c59f9d2515efa30c55c16ef307f892f04e49dc6acffc743a219cb9"
                    },
                    {
                        "name":  "skill-usage-auditor",

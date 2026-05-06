@@ -1,0 +1,54 @@
+{
+  "role_family": "agile-lead-scrum-master",
+  "use_when_job_mentions": [
+    "scrum master",
+    "agile lead",
+    "agile coach",
+    "scrum",
+    "kanban",
+    "ceremonies",
+    "cerimonias ageis",
+    "maturidade agil",
+    "remocao de impedimentos"
+  ],
+  "target_titles": [
+    "Scrum Master Senior",
+    "Agile Lead",
+    "Agile Coach"
+  ],
+  "prioritize_if_supported": [
+    "Scrum",
+    "Kanban",
+    "cerimonias ageis",
+    "metricas ageis",
+    "metricas de fluxo",
+    "KPIs",
+    "melhoria continua",
+    "remocao de impedimentos",
+    "squads multidisciplinares",
+    "produto e stakeholders",
+    "transformacao agil",
+    "gestao de conflitos"
+  ],
+  "compact_phrases": [
+    "facilitacao Scrum/Kanban",
+    "metricas ageis e de fluxo",
+    "remocao de impedimentos",
+    "melhoria continua",
+    "squads multidisciplinares",
+    "produto e stakeholders"
+  ],
+  "rewrite_guidance": [
+    "Preferir facilitacao, fluxo, maturidade, colaboracao e entrega de valor.",
+    "Usar backlog/priorizacao apenas quando houver evidencia de atuacao com produto ou stakeholders.",
+    "Nao transformar cargos reais em Scrum Master; manter cargos historicos e ajustar bullets."
+  ],
+  "omit_unless_explicit": [
+    "Jira",
+    "Azure DevOps",
+    "Trello",
+    "SAFe",
+    "Product Owner formal",
+    "setor de saude"
+  ]
+}

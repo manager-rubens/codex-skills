@@ -1,0 +1,55 @@
+<div style="margin:0;padding:0;background:#f3f2ef;font-family:Arial,Helvetica,sans-serif;color:#1f2937;">
+  <div style="max-width:720px;margin:0 auto;padding:24px 12px;">
+    <div style="background:#ffffff;border:1px solid #d9dde3;border-radius:10px;overflow:hidden;">
+      <div style="background:#0a66c2;padding:24px 28px;color:#ffffff;">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;opacity:.9;">
+          Job Fit Digest - {{DATE_DD_MM_YYYY}}
+        </div>
+        <h1 style="margin:8px 0 8px;font-size:26px;line-height:1.25;font-weight:700;">
+          Vagas recomendadas para voce
+        </h1>
+        <p style="margin:0;font-size:15px;line-height:1.55;">
+          {{HEADLINE}}
+        </p>
+      </div>
+
+      <div style="padding:18px 28px;background:#ffffff;border-bottom:1px solid #e5e7eb;">
+        <span style="display:inline-block;margin:0 8px 8px 0;padding:6px 10px;border-radius:999px;background:#e8f3ff;color:#0a66c2;font-size:13px;font-weight:700;">
+          {{EMAILS_SCANNED}} e-mails analisados
+        </span>
+        <span style="display:inline-block;margin:0 8px 8px 0;padding:6px 10px;border-radius:999px;background:#edf7ed;color:#1f7a3f;font-size:13px;font-weight:700;">
+          {{JOBS_EXTRACTED}} vagas extraidas
+        </span>
+        <span style="display:inline-block;margin:0 8px 8px 0;padding:6px 10px;border-radius:999px;background:#fff7e6;color:#8a5a00;font-size:13px;font-weight:700;">
+          {{JOBS_SELECTED}} selecionadas
+        </span>
+        <div style="margin-top:10px;font-size:13px;color:#6b7280;line-height:1.5;">
+          <strong>Principais sinais:</strong> {{SIGNALS_TEXT}}
+        </div>
+      </div>
+
+      <div style="padding:22px 20px 8px;background:#f8fafc;">
+        <h2 style="margin:0 8px 14px;font-size:17px;line-height:1.3;color:#111827;">
+          Melhores matches
+        </h2>
+        {{TOP_JOBS_HTML}}
+      </div>
+
+      <div style="padding:20px 28px;background:#ffffff;border-top:1px solid #e5e7eb;">
+        <h2 style="margin:0 0 12px;font-size:17px;color:#111827;">Outras boas opcoes</h2>
+        {{OTHER_JOBS_HTML}}
+      </div>
+
+      <div style="padding:18px 28px;background:#ffffff;border-top:1px solid #e5e7eb;">
+        <h2 style="margin:0 0 10px;font-size:16px;color:#111827;">Ignorados nesta varredura</h2>
+        <ul style="margin:0;padding-left:18px;color:#4b5563;font-size:13px;line-height:1.6;">
+          {{IGNORED_HTML}}
+        </ul>
+      </div>
+
+      <div style="padding:18px 28px;background:#f8fafc;color:#6b7280;font-size:12px;line-height:1.55;border-top:1px solid #e5e7eb;">
+        <strong>Observacao:</strong> {{NOTE}}
+      </div>
+    </div>
+  </div>
+</div>

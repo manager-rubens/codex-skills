@@ -1,0 +1,4 @@
+interface:
+  display_name: "product-dev-prd-to-codex-prompt"
+  short_description: "Transforma PRDs em prompts para Codex"
+  default_prompt: "Use $product-dev-prd-to-codex-prompt to create a complete initial Codex prompt from my PRD."

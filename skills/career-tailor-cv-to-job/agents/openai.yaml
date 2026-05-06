@@ -1,0 +1,4 @@
+interface:
+  display_name: "career-tailor-cv-to-job"
+  short_description: "Adapta CV para vagas mantendo formatacao"
+  default_prompt: "Use $career-tailor-cv-to-job para adaptar meu CV original a esta descricao de vaga e gerar um PDF ATS-friendly."

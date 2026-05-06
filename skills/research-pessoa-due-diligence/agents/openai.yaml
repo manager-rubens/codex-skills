@@ -1,0 +1,4 @@
+interface:
+  display_name: "research-pessoa-due-diligence"
+  short_description: "Due diligence juridica e idoneidade publica"
+  default_prompt: "Use $research-pessoa-due-diligence para levantar fontes publicas, documentos, processos e evidencias de idoneidade sobre uma pessoa."
