@@ -1,4 +1,0 @@
-interface:
-  display_name: "Skill Usage Auditor"
-  short_description: "Audit skill usage and improve repetitive flows"
-  default_prompt: "Use $skill-usage-auditor to audit this conversation, map the commands and procedures used by a skill, and suggest flow improvements."

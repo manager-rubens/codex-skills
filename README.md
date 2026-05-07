@@ -22,17 +22,9 @@ Nao inclui:
 - [career-tailor-cv-to-job](skills/career-tailor-cv-to-job/SKILL.md)
 - [codex-ops-publish-local-skills-catalog](skills/codex-ops-publish-local-skills-catalog/SKILL.md)
 - [codex-ops-skill-usage-auditor](skills/codex-ops-skill-usage-auditor/SKILL.md)
-- [company-jobs](skills/company-jobs/SKILL.md)
-- [curadoria-eventos](skills/curadoria-eventos/SKILL.md)
-- [gemini-interview-prep-prompt](skills/gemini-interview-prep-prompt/SKILL.md)
-- [job-fit-evaluator](skills/job-fit-evaluator/SKILL.md)
-- [pessoa-due-diligence](skills/pessoa-due-diligence/SKILL.md)
-- [prd-to-codex-prompt](skills/prd-to-codex-prompt/SKILL.md)
 - [product-dev-prd-to-codex-prompt](skills/product-dev-prd-to-codex-prompt/SKILL.md)
 - [research-curadoria-eventos](skills/research-curadoria-eventos/SKILL.md)
 - [research-pessoa-due-diligence](skills/research-pessoa-due-diligence/SKILL.md)
-- [skill-usage-auditor](skills/skill-usage-auditor/SKILL.md)
-- [tailor-cv-to-job](skills/tailor-cv-to-job/SKILL.md)
 
 ## Arquivos
 

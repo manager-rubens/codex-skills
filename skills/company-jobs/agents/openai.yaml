@@ -1,4 +1,0 @@
-interface:
-  display_name: "Company Jobs"
-  short_description: "Find and summarize open company roles"
-  default_prompt: "Use $company-jobs to find all current job openings from this company's careers site."
