@@ -1,0 +1,4 @@
+interface:
+  display_name: "Career CV English Translator"
+  short_description: "Translate tailored CVs into natural English"
+  default_prompt: "Use $career-translate-cv-to-english to translate this tailored CV into natural English and export an updated PDF."

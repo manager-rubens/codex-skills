@@ -2,7 +2,7 @@
 
 Catalogo das skills pessoais criadas neste ambiente local do Codex.
 
-Gerado em: 2026-05-06 (America/Sao_Paulo)
+Gerado em: 2026-05-12 (America/Sao_Paulo)
 
 ## Escopo
 
@@ -18,8 +18,10 @@ Nao inclui:
 - [career-company-jobs](skills/career-company-jobs/SKILL.md)
 - [career-gemini-interview-prep-prompt](skills/career-gemini-interview-prep-prompt/SKILL.md)
 - [career-job-fit-evaluator](skills/career-job-fit-evaluator/SKILL.md)
+- [career-review-company-ratings](skills/career-review-company-ratings/SKILL.md)
 - [career-salary-market-research](skills/career-salary-market-research/SKILL.md)
 - [career-tailor-cv-to-job](skills/career-tailor-cv-to-job/SKILL.md)
+- [career-translate-cv-to-english](skills/career-translate-cv-to-english/SKILL.md)
 - [codex-ops-publish-local-skills-catalog](skills/codex-ops-publish-local-skills-catalog/SKILL.md)
 - [codex-ops-skill-usage-auditor](skills/codex-ops-skill-usage-auditor/SKILL.md)
 - [product-dev-prd-to-codex-prompt](skills/product-dev-prd-to-codex-prompt/SKILL.md)

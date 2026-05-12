@@ -1,0 +1,4 @@
+interface:
+  display_name: "Career Review Company Ratings"
+  short_description: "Analisa avaliações de empresa por cargos-alvo"
+  default_prompt: "Use $career-review-company-ratings para analisar avaliações públicas de uma empresa e filtrar cargos próximos de TI, Produto e Projetos."

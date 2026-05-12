@@ -1,9 +1,9 @@
 {
-    "generated_at":  "2026-05-06",
+    "generated_at":  "2026-05-12",
     "timezone":  "America/Sao_Paulo",
     "scope":  "Only user-created Codex skills from $CODEX_HOME/skills, excluding .system and plugin caches.",
     "totals":  {
-                   "user_created_skills":  10
+                   "user_created_skills":  12
                },
     "skills":  [
                    {
@@ -28,6 +28,13 @@
                        "sha256":  "b5d5306e3b5a9dba65a42a0d0bcd5897b239d77a919e49c0586beb367278561e"
                    },
                    {
+                       "name":  "career-review-company-ratings",
+                       "description":  "Analyze public employee-review pages for a target company and summarize only reviews whose job titles are related or adjacent to career targets such as technology, IT, data, product management, project/program management, PMO, implementation, digital transformation, business systems, or product operations. Use when the user asks to inspect Glassdoor, Indeed, Comparably, Love Mondays-style company reviews, filter by relevant roles, compute average review scores, and synthesize pros and cons for career decision-making.",
+                       "source_path":  "$CODEX_HOME/skills/career-review-company-ratings/SKILL.md",
+                       "repository_path":  "skills/career-review-company-ratings/SKILL.md",
+                       "sha256":  "072bfc8d1e25ab7d2cb3cc7bcfc9c90076ef2fc742ea13d493c8d6439a7c0a07"
+                   },
+                   {
                        "name":  "career-salary-market-research",
                        "description":  "Research current salary ranges for a job position by company, role/title, contract type, and market using Glassdoor as the priority source and Michael Page as a secondary benchmark. Use when the user asks for salario, salary, remuneracao, compensation, media salarial, Glassdoor salary, Michael Page salary guide, or wants monthly and annual salary estimates with sources, company-name ambiguity checks, fallback to comparable companies, and a confidence level.",
                        "source_path":  "$CODEX_HOME/skills/career-salary-market-research/SKILL.md",
@@ -40,6 +47,13 @@
                        "source_path":  "$CODEX_HOME/skills/career-tailor-cv-to-job/SKILL.md",
                        "repository_path":  "skills/career-tailor-cv-to-job/SKILL.md",
                        "sha256":  "800c59727dcfed8f93b9ad1709bb448808149229f7adf2817917b37b1ddfe3fe"
+                   },
+                   {
+                       "name":  "career-translate-cv-to-english",
+                       "description":  "Translate an existing tailored CV/resume into natural, ATS-friendly professional English while preserving the editable document formatting and exporting an updated PDF. Use when Codex needs to convert a Portuguese CV to English for a specific job, adapt bullet phrasing to English-speaking resume expectations, avoid literal translations, keep facts unchanged, and produce an English ODT/DOCX/PDF version.",
+                       "source_path":  "$CODEX_HOME/skills/career-translate-cv-to-english/SKILL.md",
+                       "repository_path":  "skills/career-translate-cv-to-english/SKILL.md",
+                       "sha256":  "dd1d2fb9e1918a48aef5f31bf124d70297641a06b9ca5a6a1faf1860665b731a"
                    },
                    {
                        "name":  "codex-ops-publish-local-skills-catalog",

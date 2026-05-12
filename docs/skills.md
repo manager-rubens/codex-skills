@@ -1,6 +1,6 @@
 # Skills pessoais do Codex
 
-Gerado em 2026-05-06 (America/Sao_Paulo).
+Gerado em 2026-05-12 (America/Sao_Paulo).
 
 Escopo: somente skills criadas pelo usuario em `$CODEX_HOME/skills`. Foram excluidas as skills originais do Codex em `.system` e as skills vindas de plugins/cache.
 
@@ -8,7 +8,7 @@ Escopo: somente skills criadas pelo usuario em `$CODEX_HOME/skills`. Foram exclu
 
 | Metrica | Total |
 | --- | ---: |
-| Skills pessoais catalogadas | 10 |
+| Skills pessoais catalogadas | 12 |
 
 ## Catalogo
 
@@ -17,8 +17,10 @@ Escopo: somente skills criadas pelo usuario em `$CODEX_HOME/skills`. Foram exclu
 | `career-company-jobs` | [skills/career-company-jobs/SKILL.md](../skills/career-company-jobs/SKILL.md) | Find current job openings from official company careers surfaces and build single-company or aggregated HTML job digests from primary sources. Use when Codex needs to search company careers pages or ATS boards, collect and normalize current openings, package them for a career-company-jobs or job-alerts digest, or deliver the digest through Apps Script and Gmail relay without leaving raw payload emails visible in the inbox. |
 | `career-gemini-interview-prep-prompt` | [skills/career-gemini-interview-prep-prompt/SKILL.md](../skills/career-gemini-interview-prep-prompt/SKILL.md) | Create a ready-to-paste Gemini prompt that turns Gemini into a rigorous, concise, respectful interview preparation coach and evaluator. Use when the user provides a professional CV/resume, LinkedIn/profile information, job description, extra context, hiring-process stage, recruiter notes, interview format, or asks to generate a prompt for Gemini to prepare someone for a job interview, mock interview, technical interview, HR screening, hiring-manager conversation, case interview, panel interview, or final interview. |
 | `career-job-fit-evaluator` | [skills/career-job-fit-evaluator/SKILL.md](../skills/career-job-fit-evaluator/SKILL.md) | Evaluate whether a job posting, recruiter message, LinkedIn role, or vacancy description is compatible with Ruben's CV, experience, target job profile, preferences, and positioning. Use when asked to assess job fit, match a role to the user's background, identify gaps, decide whether to apply, tailor a CV/profile summary, or explain how well a position aligns with the user's experience. |
+| `career-review-company-ratings` | [skills/career-review-company-ratings/SKILL.md](../skills/career-review-company-ratings/SKILL.md) | Analyze public employee-review pages for a target company and summarize only reviews whose job titles are related or adjacent to career targets such as technology, IT, data, product management, project/program management, PMO, implementation, digital transformation, business systems, or product operations. Use when the user asks to inspect Glassdoor, Indeed, Comparably, Love Mondays-style company reviews, filter by relevant roles, compute average review scores, and synthesize pros and cons for career decision-making. |
 | `career-salary-market-research` | [skills/career-salary-market-research/SKILL.md](../skills/career-salary-market-research/SKILL.md) | Research current salary ranges for a job position by company, role/title, contract type, and market using Glassdoor as the priority source and Michael Page as a secondary benchmark. Use when the user asks for salario, salary, remuneracao, compensation, media salarial, Glassdoor salary, Michael Page salary guide, or wants monthly and annual salary estimates with sources, company-name ambiguity checks, fallback to comparable companies, and a confidence level. |
 | `career-tailor-cv-to-job` | [skills/career-tailor-cv-to-job/SKILL.md](../skills/career-tailor-cv-to-job/SKILL.md) | Adapt an existing editable CV/resume to a specific job description while preserving the original document formatting and generating a PDF. Use when the user sends a vacancy/job description and asks to tailor, reescrever, otimizar para ATS, adaptar CV/curriculo/resume, extrair palavras-chave da vaga, update the Objective/Objetivo section, or create a PDF named for the candidate and job title without inventing experience or changing real job history. If the only source is PDF, use this skill only to save/analyze the original and request an editable source before producing the final formatted CV. |
+| `career-translate-cv-to-english` | [skills/career-translate-cv-to-english/SKILL.md](../skills/career-translate-cv-to-english/SKILL.md) | Translate an existing tailored CV/resume into natural, ATS-friendly professional English while preserving the editable document formatting and exporting an updated PDF. Use when Codex needs to convert a Portuguese CV to English for a specific job, adapt bullet phrasing to English-speaking resume expectations, avoid literal translations, keep facts unchanged, and produce an English ODT/DOCX/PDF version. |
 | `codex-ops-publish-local-skills-catalog` | [skills/codex-ops-publish-local-skills-catalog/SKILL.md](../skills/codex-ops-publish-local-skills-catalog/SKILL.md) | Compare user-created local Codex skills in $CODEX_HOME/skills with the GitHub catalog repository, synchronize changed skill folders and generated catalog files, validate the result, and publish safe updates to GitHub. Use when the user asks to varrer, sincronizar, comparar, atualizar, publicar, pushar, or catalogar local skills in manager-rubens/codex-skills or another personal skills catalog repository. |
 | `codex-ops-skill-usage-auditor` | [skills/codex-ops-skill-usage-auditor/SKILL.md](../skills/codex-ops-skill-usage-auditor/SKILL.md) | Audit how a Codex skill was used in a conversation or transcript, mapping invoked skills, shell/tool commands, app/browser/web calls, file edits, procedures performed, repeated steps, friction points, and concrete opportunities to improve the skill workflow. Use when the user asks to audit, review, varrer, analisar, or mapear uso de skill; list commands or procedures used by a skill; reduce repetitive work after a skill run; or turn a conversation into skill improvements. |
 | `product-dev-prd-to-codex-prompt` | [skills/product-dev-prd-to-codex-prompt/SKILL.md](../skills/product-dev-prd-to-codex-prompt/SKILL.md) | Create a clear, complete initial prompt for OpenAI Codex from a Product Requirements Document (PRD). Use when the user wants to turn a PRD, product spec, feature brief, ticket, or requirements document into a Codex-ready prompt for implementation, refactoring, debugging, review, testing, or planning. The skill must require the user to provide or attach a PRD before drafting the prompt. |
@@ -272,6 +274,115 @@ Use this concise structure unless the user requests another format:
 ```
 ````
 
+### career-review-company-ratings
+
+Origem: `$CODEX_HOME/skills/career-review-company-ratings/SKILL.md`
+
+````markdown
+---
+name: career-review-company-ratings
+description: Analyze public employee-review pages for a target company and summarize only reviews whose job titles are related or adjacent to career targets such as technology, IT, data, product management, project/program management, PMO, implementation, digital transformation, business systems, or product operations. Use when the user asks to inspect Glassdoor, Indeed, Comparably, Love Mondays-style company reviews, filter by relevant roles, compute average review scores, and synthesize pros and cons for career decision-making.
+---
+
+# Career Review Company Ratings
+
+## Overview
+
+Analyze company-review sites from a career lens: gather public review data, keep only roles relevant to the user's target domains, compute the average rating for the filtered sample, and summarize recurring positive and negative themes.
+
+## Workflow
+
+1. Open the user-provided company review URL first.
+2. Browse/search the web because review counts, ratings, and recent reviews change frequently.
+3. Prefer primary review pages from the named platform. Use search snippets only as supplements when the platform exposes public snippets that the opened page hides or paginates.
+4. Record source date context: current date, platform, company name, overall rating, total review count, recommendation percentage, and category ratings when visible.
+5. Extract public review records with these fields when available:
+   - `rating`
+   - `date`
+   - `title`
+   - `job_title`
+   - `employment_status`
+   - `location`
+   - `pros`
+   - `cons`
+   - `source_url`
+6. Filter review records by role relevance.
+7. Compute the arithmetic mean of the numeric ratings in the filtered set.
+8. Summarize themes from the filtered set, not from all company reviews, unless explicitly labeled as overall-company context.
+9. Cite the exact pages used.
+
+## Role Filtering
+
+Default inclusion targets:
+
+- Technology and IT: `TI`, `tecnologia`, `technology`, `IT`, `sistemas`, `systems`, `software`, `developer`, `desenvolvedor`, `engenharia de software`, `infraestrutura`, `security`, `cyber`, `cloud`, `support`, `suporte`, `data`, `dados`, `analytics`, `BI`, `business intelligence`.
+- Product: `produto`, `product`, `product manager`, `product owner`, `PO`, `PM`, `product designer`, `UX`, `service design`, `product ops`.
+- Projects and delivery: `projeto`, `projetos`, `project`, `program`, `portfolio`, `PMO`, `scrum`, `agile`, `delivery`, `implantacao`, `implementacao`, `implementation`, `transformacao digital`.
+- Adjacent business/technology roles: `business analyst`, `analista de negocios`, `processos`, `automacao`, `digital`, `sistemas de negocio`, `engenharia` only when the title or review content implies implementation, systems, product, data, transformation, or project work.
+
+Default exclusions:
+
+- Generic titles with no domain signal, such as only `Analista`, `Especialista`, `Analista Senior`, `Coordenador`, or `Gerente`.
+- Operational, maintenance, toll, cashier, administrative, HR, legal, finance, sales, hospital, atendimento, arrecadacao, and apprentice roles unless the user explicitly asks to include them.
+- Vague confidential/anonymous titles unless the review text clearly signals target-domain work.
+
+If a role is ambiguous, either exclude it or include it in a separate "possivelmente relacionado" group. Do not blend ambiguous roles into the main average unless explaining the assumption.
+
+## Glassdoor Notes
+
+Glassdoor frequently limits public access, changes pagination, and exposes different snippets through search indexing versus direct page opens. Do not imply a complete scrape when only public snippets are available.
+
+When access is limited:
+
+- Say the analysis is based on publicly accessible reviews/snippets.
+- Distinguish direct page data from search-index snippets.
+- Avoid scraping behind login walls or bypassing platform controls.
+- Use the platform's visible aggregate numbers for company context, but compute the filtered-role average only from review records whose rating and role are visible.
+
+## Calculations
+
+For the filtered sample:
+
+```text
+average = sum(visible numeric ratings for included role reviews) / count(included role reviews)
+```
+
+Report:
+
+- filtered review count
+- included roles
+- average rating rounded to one decimal
+- optional alternate average excluding "adjacent" roles
+- notes on excluded ambiguous roles
+
+## Output Format
+
+Respond in the user's language. Keep the answer concise but decision-useful.
+
+Use this structure unless the user requested another format:
+
+1. Short scope note with date and access limitations.
+2. Company-level context from the review platform.
+3. Table of included filtered reviews.
+4. Average rating for the filtered set.
+5. Positive themes.
+6. Negative themes.
+7. Missing/limited data, especially if no product or project-management-specific reviews were visible.
+8. Source links.
+
+Do not quote long review text. Paraphrase themes and use very short excerpts only when necessary.
+
+## Quality Checks
+
+Before finalizing:
+
+- Verify every included row has a role that matches the filter or is clearly marked adjacent.
+- Ensure the average uses only included rows, not overall-company rating.
+- Check that pros/cons summaries are not borrowed from excluded roles.
+- Cite sources used.
+- State uncertainty clearly when platform access or snippets limit coverage.
+````
+
 ### career-salary-market-research
 
 Origem: `$CODEX_HOME/skills/career-salary-market-research/SKILL.md`
@@ -504,6 +615,99 @@ Keep the final response short. Provide:
 - Core competencies targeted.
 - Any job keywords not used because they were unsupported by the original CV.
 - If blocked by PDF-only input, say that the original PDF was saved/analyzed and ask for the editable CV source instead of returning a flawed final PDF.
+````
+
+### career-translate-cv-to-english
+
+Origem: `$CODEX_HOME/skills/career-translate-cv-to-english/SKILL.md`
+
+````markdown
+---
+name: career-translate-cv-to-english
+description: Translate an existing tailored CV/resume into natural, ATS-friendly professional English while preserving the editable document formatting and exporting an updated PDF. Use when Codex needs to convert a Portuguese CV to English for a specific job, adapt bullet phrasing to English-speaking resume expectations, avoid literal translations, keep facts unchanged, and produce an English ODT/DOCX/PDF version.
+---
+
+# Translate CV To English
+
+## Purpose
+
+Convert an already tailored CV into professional English for the target job while preserving factual integrity, layout, section order, and export quality. The result should read like an English-language resume, not a literal translation.
+
+## Non-Negotiable Rules
+
+- Do not invent employers, roles, dates, metrics, tools, technologies, degrees, certifications, English fluency, or achievements.
+- Preserve the original job history and seniority. Translate held titles only when the English title keeps the same meaning and level.
+- Use the target vacancy to choose emphasis, vocabulary, and bullet style, but include only skills supported by the source CV.
+- Do not copy content from sample English CVs supplied only as formatting references. Use them only for structure, bullet rhythm, and tone.
+- Preserve the editable source formatting. Do not rewrite PDF text streams or fixed-position PDF coordinates.
+- Keep language concise, concrete, and human. Avoid inflated phrases such as "visionary leader", "proven track record", "dynamic environment", or "passionate professional".
+- If the English version overflows the original/reference PDF page count, shorten wording and regenerate before returning the final files.
+
+## Default Output
+
+- Edited source: `CV [Full Name] - [Job Title] - English.odt` or matching editable format.
+- PDF: `CV [Full Name] - [Job Title] - English.pdf`.
+- Optional audit file when using audited replacements.
+
+## Workflow
+
+1. Inspect the source CV and job description.
+   - Prefer the most recent tailored editable CV for the role.
+   - Dump or extract visible text before drafting replacements.
+   - Identify sections, summary lines, work history, skills, education, courses, page count, and formatting constraints.
+   - When the user supplies an English CV only as a format reference, inspect it for structure and style only. Do not copy its content.
+   - For the recruiter-style English CV format, read `references/english-cv-format.md`.
+
+2. Build a translation ledger.
+   - Mark each target job keyword as explicit, strongly supported, weakly supported, or unsupported.
+   - Translate and emphasize explicit/strongly supported items.
+   - Use weak support only as broad positioning.
+   - Omit unsupported terms instead of forcing them into the English CV.
+
+3. Translate for English resume expectations.
+   - Prefer action + scope + outcome when the source supports it.
+   - Prefer the structure `Professional Summary`, `Core Competencies`, `Professional Experience`, `Education`, and `Certifications & Development` when the user asks for the English CV format reference.
+   - Put competency groups before experience when following that reference format.
+   - Keep quantified impact already present, such as lead time reduction, satisfaction improvement, ramp-up reduction, or number of leaders developed.
+   - Replace literal Portuguese business phrasing with idiomatic English:
+     - `PDIs` -> `individual development plans` or `development plans`.
+     - `ritos Scrum e Kanban` -> `Scrum/Kanban facilitation`.
+     - `métricas de fluxo` -> `flow metrics`.
+     - `times técnicos/não técnicos` -> `technical and non-technical teams`.
+     - `stakeholders técnicos e não técnicos` -> `technical and non-technical stakeholders`.
+     - `Gestão de Pessoas` -> `People Management`.
+     - `Formação Acadêmica` -> `Education`.
+     - `Formação Complementar` -> `Additional Training`.
+   - Keep common global tech terms in English (`lead time`, `KPIs`, `APIs`, `microservices`, `containers`, `stakeholders`).
+   - Use `Bachelor's degree` only when the source supports a completed undergraduate degree.
+
+4. Preserve document structure.
+   - For ODT sources, reuse `career-tailor-cv-to-job/scripts/tailor_odt.py` if available.
+   - If a user-provided ODT is explicitly a format reference, it may be used as the output template, replacing all sample content with content from the current source CV.
+   - Create UTF-8 replacement JSON with exact `old`, `new`, and `expected` counts.
+   - Validate replacements before applying.
+   - When a visible line crosses styled spans, use `--find-visible-text-fragment` and replace smaller exact text-node segments.
+   - If text-node replacements include XML-escaped characters such as `&amp;`, `&quot;`, or `&apos;`, keep replacements XML-valid.
+   - Never use the same file as both source and output; write to a new file, then rename only after validation if needed.
+
+5. Compact for layout.
+   - English usually expands versus Portuguese. Draft compact bullets from the start.
+   - If export adds pages, shorten summary lines, repeated verbs, course names, and long skill lists while preserving supported keywords.
+   - Prefer concise lines such as `Stakeholder communication, translating business needs into technical solutions.` over literal long sentences.
+
+6. Export and validate.
+   - Export the edited source to PDF using the existing project converter when available.
+   - Compare final PDF page count to the source/reference PDF.
+   - Inspect the final visible text enough to verify translated sections, required facts, and no accidental Portuguese leftovers except names, institutions, or course titles that should remain.
+   - Return the PDF path and editable source path only after page count and text checks pass.
+
+## Ruben-Specific Safeguards
+
+When working on Ruben's CV files, preserve existing AI/tool/course additions if present:
+
+- Keep `Claude Code`, `OpenAi Codex`, and `Agent Skills` in the AI/tools line.
+- Keep `Claude Code in Action - Anthropic`, `Introduction to Agent Skills - Anthropic`, `Introduction to Model Context Protocol - Anthropic`, and `Buiding with the Claude API - Anthropic`.
+- Do not add a Languages section or English fluency unless the user explicitly requests it.
 ````
 
 ### codex-ops-publish-local-skills-catalog
