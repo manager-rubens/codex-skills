@@ -2,7 +2,7 @@
 
 Catalogo das skills pessoais criadas neste ambiente local do Codex.
 
-Gerado em: 2026-05-12 (America/Sao_Paulo)
+Gerado em: 2026-05-18 (America/Sao_Paulo)
 
 ## Escopo
 
@@ -25,6 +25,7 @@ Nao inclui:
 - [codex-ops-publish-local-skills-catalog](skills/codex-ops-publish-local-skills-catalog/SKILL.md)
 - [codex-ops-skill-usage-auditor](skills/codex-ops-skill-usage-auditor/SKILL.md)
 - [product-dev-prd-to-codex-prompt](skills/product-dev-prd-to-codex-prompt/SKILL.md)
+- [product-prd-interviewer](skills/product-prd-interviewer/SKILL.md)
 - [research-curadoria-eventos](skills/research-curadoria-eventos/SKILL.md)
 - [research-pessoa-due-diligence](skills/research-pessoa-due-diligence/SKILL.md)
 
@@ -34,4 +35,3 @@ Nao inclui:
 - docs/skills.md: catalogo legivel com os conteudos completos reunidos.
 - data/skills.json: inventario estruturado com metadados e checksums.
 - data/skills.csv: exportacao tabular com metadados.
-- scripts/generate-personal-skills.ps1: script para atualizar este catalogo.

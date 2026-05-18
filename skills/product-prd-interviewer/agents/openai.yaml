@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product PRD Interviewer"
+  short_description: "Interview app ideas and draft a PRD"
+  default_prompt: "Use $product-prd-interviewer to interview me about a new app idea and produce a professional PRD."

@@ -1,9 +1,9 @@
 {
-    "generated_at":  "2026-05-12",
+    "generated_at":  "2026-05-18",
     "timezone":  "America/Sao_Paulo",
     "scope":  "Only user-created Codex skills from $CODEX_HOME/skills, excluding .system and plugin caches.",
     "totals":  {
-                   "user_created_skills":  12
+                   "user_created_skills":  13
                },
     "skills":  [
                    {
@@ -75,6 +75,13 @@
                        "source_path":  "$CODEX_HOME/skills/product-dev-prd-to-codex-prompt/SKILL.md",
                        "repository_path":  "skills/product-dev-prd-to-codex-prompt/SKILL.md",
                        "sha256":  "3dc9ff173f12430bb89e8e35e1c7447f4d7f1b218ad8bcffcd49e7b947c1a3e9"
+                   },
+                   {
+                       "name":  "product-prd-interviewer",
+                       "description":  "Act as a senior product professional to interview the user about an app, SaaS, internal tool, platform, website, automation, or software product and turn the discovery into a professional Product Requirements Document (PRD). Use when the user asks to be interviewed about a product idea, define app objectives, create a PRD, product brief, MVP scope, requirements document, user stories, acceptance criteria, feature spec, or product handoff for development. Trigger on Portuguese or English requests such as \"me entrevista para entender o app\", \"gera um PRD\", \"brief de produto\", \"requisitos da aplicacao\", \"product requirements\", or \"turn this idea into a PRD\".",
+                       "source_path":  "$CODEX_HOME/skills/product-prd-interviewer/SKILL.md",
+                       "repository_path":  "skills/product-prd-interviewer/SKILL.md",
+                       "sha256":  "c64d690a509f25d31a46164330c6affc0dcec1a8764dc4bcb8c96f8329871f8e"
                    },
                    {
                        "name":  "research-curadoria-eventos",
