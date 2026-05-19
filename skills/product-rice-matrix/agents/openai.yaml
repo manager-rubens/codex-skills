@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product RICE Matrix"
+  short_description: "Prioritize scoped tasks with a RICE matrix."
+  default_prompt: "Prioritize the provided tasks using RICE. Use the task scope, acceptance criteria, current status, and available evidence; list assumptions, scores, and recommended order."

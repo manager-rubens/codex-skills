@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tempo do Proximo Fim de Semana"
+  short_description: "Previsao para BH, Jundiai, Guarulhos e SP"
+  default_prompt: "Use $weather-next-weekend-bh-sp para listar o tempo do proximo final de semana."

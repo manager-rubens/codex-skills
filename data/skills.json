@@ -3,7 +3,7 @@
     "timezone":  "America/Sao_Paulo",
     "scope":  "Only user-created Codex skills from $CODEX_HOME/skills, excluding .system and plugin caches.",
     "totals":  {
-                   "user_created_skills":  13
+                   "user_created_skills":  15
                },
     "skills":  [
                    {
@@ -84,6 +84,13 @@
                        "sha256":  "c64d690a509f25d31a46164330c6affc0dcec1a8764dc4bcb8c96f8329871f8e"
                    },
                    {
+                       "name":  "product-rice-matrix",
+                       "description":  "",
+                       "source_path":  "$CODEX_HOME/skills/product-rice-matrix/SKILL.md",
+                       "repository_path":  "skills/product-rice-matrix/SKILL.md",
+                       "sha256":  "61bd8fbfbaa3dc0d46db25500caba1a9ad41069a879d504ff73c398eb87950d1"
+                   },
+                   {
                        "name":  "research-curadoria-eventos",
                        "description":  "",
                        "source_path":  "$CODEX_HOME/skills/research-curadoria-eventos/SKILL.md",
@@ -96,6 +103,13 @@
                        "source_path":  "$CODEX_HOME/skills/research-pessoa-due-diligence/SKILL.md",
                        "repository_path":  "skills/research-pessoa-due-diligence/SKILL.md",
                        "sha256":  "899d6c12a3c59f9d2515efa30c55c16ef307f892f04e49dc6acffc743a219cb9"
+                   },
+                   {
+                       "name":  "weather-next-weekend-bh-sp",
+                       "description":  "",
+                       "source_path":  "$CODEX_HOME/skills/weather-next-weekend-bh-sp/SKILL.md",
+                       "repository_path":  "skills/weather-next-weekend-bh-sp/SKILL.md",
+                       "sha256":  "5ef13bf45ae3c3cc0671f3bc6566711ced3b6bd58f5c28fd3b43735ac6d21a95"
                    }
                ]
 }

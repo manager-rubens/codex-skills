@@ -10,5 +10,7 @@ name,repository_path,source_path,sha256,description
 "codex-ops-skill-usage-auditor","skills/codex-ops-skill-usage-auditor/SKILL.md","$CODEX_HOME/skills/codex-ops-skill-usage-auditor/SKILL.md","66cf59b4274be774c058e6f3d2877c5ef7d3bb1b43a766ac813bd0af57af661d",""
 "product-dev-prd-to-codex-prompt","skills/product-dev-prd-to-codex-prompt/SKILL.md","$CODEX_HOME/skills/product-dev-prd-to-codex-prompt/SKILL.md","3dc9ff173f12430bb89e8e35e1c7447f4d7f1b218ad8bcffcd49e7b947c1a3e9",""
 "product-prd-interviewer","skills/product-prd-interviewer/SKILL.md","$CODEX_HOME/skills/product-prd-interviewer/SKILL.md","c64d690a509f25d31a46164330c6affc0dcec1a8764dc4bcb8c96f8329871f8e",""
+"product-rice-matrix","skills/product-rice-matrix/SKILL.md","$CODEX_HOME/skills/product-rice-matrix/SKILL.md","61bd8fbfbaa3dc0d46db25500caba1a9ad41069a879d504ff73c398eb87950d1",""
 "research-curadoria-eventos","skills/research-curadoria-eventos/SKILL.md","$CODEX_HOME/skills/research-curadoria-eventos/SKILL.md","ab8404d8de3e4838b0e560ee9105a9949a530e40aae73eba4fbbe4c02f1673f1",""
 "research-pessoa-due-diligence","skills/research-pessoa-due-diligence/SKILL.md","$CODEX_HOME/skills/research-pessoa-due-diligence/SKILL.md","899d6c12a3c59f9d2515efa30c55c16ef307f892f04e49dc6acffc743a219cb9",""
+"weather-next-weekend-bh-sp","skills/weather-next-weekend-bh-sp/SKILL.md","$CODEX_HOME/skills/weather-next-weekend-bh-sp/SKILL.md","5ef13bf45ae3c3cc0671f3bc6566711ced3b6bd58f5c28fd3b43735ac6d21a95",""

@@ -26,8 +26,10 @@ Nao inclui:
 - [codex-ops-skill-usage-auditor](skills/codex-ops-skill-usage-auditor/SKILL.md)
 - [product-dev-prd-to-codex-prompt](skills/product-dev-prd-to-codex-prompt/SKILL.md)
 - [product-prd-interviewer](skills/product-prd-interviewer/SKILL.md)
+- [product-rice-matrix](skills/product-rice-matrix/SKILL.md)
 - [research-curadoria-eventos](skills/research-curadoria-eventos/SKILL.md)
 - [research-pessoa-due-diligence](skills/research-pessoa-due-diligence/SKILL.md)
+- [weather-next-weekend-bh-sp](skills/weather-next-weekend-bh-sp/SKILL.md)
 
 ## Arquivos
 
