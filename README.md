@@ -2,7 +2,7 @@
 
 Catalogo das skills pessoais criadas neste ambiente local do Codex.
 
-Gerado em: 2026-05-18 (America/Sao_Paulo)
+Gerado em: 2026-05-19 (America/Sao_Paulo)
 
 ## Escopo
 
@@ -31,7 +31,7 @@ Nao inclui:
 
 ## Arquivos
 
-- skills/<nome>/SKILL.md: conteudo completo de cada skill pessoal.
-- docs/skills.md: catalogo legivel com os conteudos completos reunidos.
-- data/skills.json: inventario estruturado com metadados e checksums.
-- data/skills.csv: exportacao tabular com metadados.
+- `skills/<nome>/SKILL.md`: conteudo completo de cada skill pessoal.
+- `docs/skills.md`: catalogo legivel com os conteudos completos reunidos.
+- `data/skills.json`: inventario estruturado com metadados e checksums.
+- `data/skills.csv`: exportacao tabular com metadados.
