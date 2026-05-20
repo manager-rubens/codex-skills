@@ -2,7 +2,7 @@
 
 Catalogo das skills pessoais criadas neste ambiente local do Codex.
 
-Gerado em: 2026-05-19 (America/Sao_Paulo)
+Gerado em: 2026-05-20 (America/Sao_Paulo)
 
 ## Escopo
 
@@ -18,6 +18,7 @@ Nao inclui:
 - [career-company-jobs](skills/career-company-jobs/SKILL.md)
 - [career-gemini-interview-prep-prompt](skills/career-gemini-interview-prep-prompt/SKILL.md)
 - [career-job-fit-evaluator](skills/career-job-fit-evaluator/SKILL.md)
+- [career-pj-contract-risk-review](skills/career-pj-contract-risk-review/SKILL.md)
 - [career-review-company-ratings](skills/career-review-company-ratings/SKILL.md)
 - [career-salary-market-research](skills/career-salary-market-research/SKILL.md)
 - [career-tailor-cv-to-job](skills/career-tailor-cv-to-job/SKILL.md)
@@ -37,3 +38,4 @@ Nao inclui:
 - `docs/skills.md`: catalogo legivel com os conteudos completos reunidos.
 - `data/skills.json`: inventario estruturado com metadados e checksums.
 - `data/skills.csv`: exportacao tabular com metadados.
+- `scripts/generate-personal-skills.ps1`: script para atualizar este catalogo.

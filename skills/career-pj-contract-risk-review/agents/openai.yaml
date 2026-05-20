@@ -1,0 +1,4 @@
+interface:
+  display_name: "PJ Contract Risk Review"
+  short_description: "Review PJ contract and role risks"
+  default_prompt: "Use $career-pj-contract-risk-review to review a PJ contract scope, company context, and legal questions."
