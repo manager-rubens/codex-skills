@@ -1,5 +1,5 @@
 {
-    "generated_at":  "2026-05-20",
+    "generated_at":  "2026-05-25",
     "timezone":  "America/Sao_Paulo",
     "scope":  "Only user-created Codex skills from $CODEX_HOME/skills, excluding .system and plugin caches.",
     "totals":  {

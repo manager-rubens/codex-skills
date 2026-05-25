@@ -1,20 +1,43 @@
-# Skills pessoais do Codex
+# Catalogo de skills do Codex
 
-Catalogo das skills pessoais criadas neste ambiente local do Codex.
+Gerado em: 2026-05-25 (America/Sao_Paulo)
 
-Gerado em: 2026-05-20 (America/Sao_Paulo)
+Escopo: skills criadas pelo usuario em $CODEX_HOME/skills (exclui .system e skills vindas de plugins/cache).
 
-## Skills
+## Resumo
+
+| Metrica | Total |
+| --- | ---: |
+| Skills pessoais catalogadas | 16 |
+
+## Catalogo
+
+| Skill | Arquivo | Descricao |
+| --- | --- | --- |
+| `career-company-jobs` | [skills/career-company-jobs/SKILL.md](../skills/career-company-jobs/SKILL.md) | Find current job openings from official company careers surfaces and build single-company or aggregated HTML job digests from primary sources. Use when Codex needs to search company careers pages or ATS boards, collect and normalize current openings, package them for a career-company-jobs or job-alerts digest, or deliver the digest through Apps Script and Gmail relay without leaving raw payload emails visible in the inbox. |
+| `career-gemini-interview-prep-prompt` | [skills/career-gemini-interview-prep-prompt/SKILL.md](../skills/career-gemini-interview-prep-prompt/SKILL.md) | Create a ready-to-paste Gemini prompt that turns Gemini into a rigorous, concise, respectful interview preparation coach and evaluator. Use when the user provides a professional CV/resume, LinkedIn/profile information, job description, extra context, hiring-process stage, recruiter notes, interview format, or asks to generate a prompt for Gemini to prepare someone for a job interview, mock interview, technical interview, HR screening, hiring-manager conversation, case interview, panel interview, or final interview. |
+| `career-job-fit-evaluator` | [skills/career-job-fit-evaluator/SKILL.md](../skills/career-job-fit-evaluator/SKILL.md) | Evaluate whether a job posting, recruiter message, LinkedIn role, or vacancy description is compatible with Ruben's CV, experience, target job profile, preferences, and positioning. Use when asked to assess job fit, match a role to the user's background, identify gaps, decide whether to apply, tailor a CV/profile summary, or explain how well a position aligns with the user's experience. |
+| `career-pj-contract-risk-review` | [skills/career-pj-contract-risk-review/SKILL.md](../skills/career-pj-contract-risk-review/SKILL.md) | Evaluate Brazilian PJ individual service arrangements for career decisions using contract scope, role/vacancy description, company context, operating model, and contexto-pj-brasil.md or the bundled PJ Brazil reference. Use when the user asks to review a vaga PJ, proposta PJ, contrato PJ, escopo de prestacao de servicos, pejotizacao risk, questions for the company/legal team, or points to negotiate before accepting or signing a PJ engagement. |
+| `career-review-company-ratings` | [skills/career-review-company-ratings/SKILL.md](../skills/career-review-company-ratings/SKILL.md) | Analyze public employee-review pages for a target company and summarize only reviews whose job titles are related or adjacent to career targets such as technology, IT, data, product management, project/program management, PMO, implementation, digital transformation, business systems, or product operations. Use when the user asks to inspect Glassdoor, Indeed, Comparably, Love Mondays-style company reviews, filter by relevant roles, compute average review scores, and synthesize pros and cons for career decision-making. |
+| `career-salary-market-research` | [skills/career-salary-market-research/SKILL.md](../skills/career-salary-market-research/SKILL.md) | Research current salary ranges for a job position by company, role/title, contract type, and market using Glassdoor as the priority source and Michael Page as a secondary benchmark. Use when the user asks for salario, salary, remuneracao, compensation, media salarial, Glassdoor salary, Michael Page salary guide, or wants monthly and annual salary estimates with sources, company-name ambiguity checks, fallback to comparable companies, and a confidence level. |
+| `career-tailor-cv-to-job` | [skills/career-tailor-cv-to-job/SKILL.md](../skills/career-tailor-cv-to-job/SKILL.md) | Adapt an existing editable CV/resume to a specific job description while preserving the original document formatting and generating a PDF. Use when the user sends a vacancy/job description and asks to tailor, reescrever, otimizar para ATS, adaptar CV/curriculo/resume, extrair palavras-chave da vaga, update the Objective/Objetivo section, or create a PDF named for the candidate and job title without inventing experience or changing real job history. If the only source is PDF, use this skill only to save/analyze the original and request an editable source before producing the final formatted CV. |
+| `career-translate-cv-to-english` | [skills/career-translate-cv-to-english/SKILL.md](../skills/career-translate-cv-to-english/SKILL.md) | Translate an existing tailored CV/resume into natural, ATS-friendly professional English while preserving the editable document formatting and exporting an updated PDF. Use when Codex needs to convert a Portuguese CV to English for a specific job, adapt bullet phrasing to English-speaking resume expectations, avoid literal translations, keep facts unchanged, and produce an English ODT/DOCX/PDF version. |
+| `codex-ops-publish-local-skills-catalog` | [skills/codex-ops-publish-local-skills-catalog/SKILL.md](../skills/codex-ops-publish-local-skills-catalog/SKILL.md) | Compare user-created local Codex skills in $CODEX_HOME/skills with the GitHub catalog repository, synchronize changed skill folders and generated catalog files, validate the result, and publish safe updates to GitHub. Use when the user asks to varrer, sincronizar, comparar, atualizar, publicar, pushar, or catalogar local skills in manager-rubens/codex-skills or another personal skills catalog repository. |
+| `codex-ops-skill-usage-auditor` | [skills/codex-ops-skill-usage-auditor/SKILL.md](../skills/codex-ops-skill-usage-auditor/SKILL.md) | Audit how a Codex skill was used in a conversation or transcript, mapping invoked skills, shell/tool commands, app/browser/web calls, file edits, procedures performed, repeated steps, friction points, and concrete opportunities to improve the skill workflow. Use when the user asks to audit, review, varrer, analisar, or mapear uso de skill; list commands or procedures used by a skill; reduce repetitive work after a skill run; or turn a conversation into skill improvements. |
+| `product-dev-prd-to-codex-prompt` | [skills/product-dev-prd-to-codex-prompt/SKILL.md](../skills/product-dev-prd-to-codex-prompt/SKILL.md) | Create a clear, complete initial prompt for OpenAI Codex from a Product Requirements Document (PRD). Use when the user wants to turn a PRD, product spec, feature brief, ticket, or requirements document into a Codex-ready prompt for implementation, refactoring, debugging, review, testing, or planning. The skill must require the user to provide or attach a PRD before drafting the prompt. |
+| `product-prd-interviewer` | [skills/product-prd-interviewer/SKILL.md](../skills/product-prd-interviewer/SKILL.md) | Act as a senior product professional to interview the user about an app, SaaS, internal tool, platform, website, automation, or software product and turn the discovery into a professional Product Requirements Document (PRD). Use when the user asks to be interviewed about a product idea, define app objectives, create a PRD, product brief, MVP scope, requirements document, user stories, acceptance criteria, feature spec, or product handoff for development. Trigger on Portuguese or English requests such as "me entrevista para entender o app", "gera um PRD", "brief de produto", "requisitos da aplicacao", "product requirements", or "turn this idea into a PRD". |
+| `product-rice-matrix` | [skills/product-rice-matrix/SKILL.md](../skills/product-rice-matrix/SKILL.md) | Create a Product Management RICE prioritization matrix for a set of previously scoped tasks. Use when the user asks to classify, rank, prioritize, score, or compare roadmap/Kanban/backlog tasks using RICE, especially when task titles, status, summaries, scope, acceptance criteria, Notion cards, issues, tickets, or PRD tasks are already available. Always base scoring on the provided task scope and evidence; do not invent missing scope. |
+| `research-curadoria-eventos` | [skills/research-curadoria-eventos/SKILL.md](../skills/research-curadoria-eventos/SKILL.md) | Buscar, curar e retornar eventos atuais para uma cidade usando fontes oficiais, APIs, portais locais, Instagram/redes sociais e inteligencia de eventos, com opcao de gerar PDF bonito com imagem de fonte para cada evento. Use quando o usuario pedir eventos, agenda cultural, shows, gastronomia, eventos corporativos, eventos gratuitos, programacao de fim de semana, o que fazer, roles, destaques por data, periodo, categoria, bairro, ponto turistico ou cidade, ou quando pedir um PDF/relatorio visual da agenda. |
+| `research-pessoa-due-diligence` | [skills/research-pessoa-due-diligence/SKILL.md](../skills/research-pessoa-due-diligence/SKILL.md) | Levantamento juridico, reputacional e de idoneidade documental de pessoa fisica com base em fontes publicas, oficiais ou autorizadas, reunindo documentos, links, processos, diarios oficiais, registros profissionais, sancoes, certidoes, sinais criminais publicos, informacoes militares publicas quando licitas e evidencias rastreaveis de boa ou ma conduta institucional. Use quando o usuario pedir investigacao juridica, due diligence, background check, "levantar tudo sobre uma pessoa", pesquisar processos, antecedentes, documentos, vinculos publicos, risco criminal, historico militar, certidoes, compliance, OSINT legal, reputacao, idoneidade, "indole" ou relatorio rastreavel sobre uma pessoa identificada ou parcialmente identificada. |
+| `weather-next-weekend-bh-sp` | [skills/weather-next-weekend-bh-sp/SKILL.md](../skills/weather-next-weekend-bh-sp/SKILL.md) | List the weather forecast for the next weekend in Belo Horizonte, Jundiai, Guarulhos, and Sao Paulo city. Use when the user asks for "tempo", weather, forecast, chuva, temperatura, or weekend conditions for BH, Jundiai, Guarulhos, and SP together, especially for the upcoming Saturday and Sunday. |
+
+## Conteudo completo
 
 ### career-company-jobs
 
-Find current job openings from official company careers surfaces and build single-company or aggregated HTML job digests from primary sources. Use when Codex needs to search company careers pages or ATS boards, collect and normalize current openings, package them for a career-company-jobs or job-alerts digest, or deliver the digest through Apps Script and Gmail relay without leaving raw payload emails visible in the inbox.
+Origem: `$CODEX_HOME/skills/career-company-jobs/SKILL.md`
 
-Repositorio: `skills/career-company-jobs/SKILL.md`
-
-SHA-256: `a541825187c833ca58bba553bc887067e6c3e923a8854b9cf6ade3b4de44e676`
-
-```md
+````markdown
 ---
 name: career-company-jobs
 description: Find current job openings from official company careers surfaces and build single-company or aggregated HTML job digests from primary sources. Use when Codex needs to search company careers pages or ATS boards, collect and normalize current openings, package them for a career-company-jobs or job-alerts digest, or deliver the digest through Apps Script and Gmail relay without leaving raw payload emails visible in the inbox.
@@ -120,17 +143,13 @@ For email digests, keep the payload and delivery rules in `references/digest-del
 `scripts/job_scraper.py` is a best-effort helper for static HTML, JSON-LD `JobPosting`, and common ATS link patterns. Treat it as a discovery aid, not the final authority. For dynamic boards such as Greenhouse, Lever, Ashby, Workday, SmartRecruiters, Recruitee, Workable, Gupy, and BambooHR, combine script output with direct browser inspection when needed.
 
 Read `references/job-board-patterns.md` only when a site uses a known ATS or the first pass misses obvious listings.
-```
+````
 
 ### career-gemini-interview-prep-prompt
 
-Create a ready-to-paste Gemini prompt that turns Gemini into a rigorous, concise, respectful interview preparation coach and evaluator. Use when the user provides a professional CV/resume, LinkedIn/profile information, job description, extra context, hiring-process stage, recruiter notes, interview format, or asks to generate a prompt for Gemini to prepare someone for a job interview, mock interview, technical interview, HR screening, hiring-manager conversation, case interview, panel interview, or final interview.
+Origem: `$CODEX_HOME/skills/career-gemini-interview-prep-prompt/SKILL.md`
 
-Repositorio: `skills/career-gemini-interview-prep-prompt/SKILL.md`
-
-SHA-256: `80a798687c23f785f3ce834e20707ae7117a70fd44147906e5aabb5880ae8ad6`
-
-```md
+````markdown
 ---
 name: career-gemini-interview-prep-prompt
 description: Create a ready-to-paste Gemini prompt that turns Gemini into a rigorous, concise, respectful interview preparation coach and evaluator. Use when the user provides a professional CV/resume, LinkedIn/profile information, job description, extra context, hiring-process stage, recruiter notes, interview format, or asks to generate a prompt for Gemini to prepare someone for a job interview, mock interview, technical interview, HR screening, hiring-manager conversation, case interview, panel interview, or final interview.
@@ -168,17 +187,13 @@ Create a complete prompt for Gemini to act as an interview preparation coach for
 ## Quality Bar
 
 The generated Gemini prompt must make Gemini behave like a demanding interview trainer, not a generic career advisor. It should produce specific preparation around the actual role scope, likely questions, answer frameworks, evidence from the candidate's background, red flags, score rubrics, and drills for the current stage.
-```
+````
 
 ### career-job-fit-evaluator
 
-Evaluate whether a job posting, recruiter message, LinkedIn role, or vacancy description is compatible with Ruben's CV, experience, target job profile, preferences, and positioning. Use when asked to assess job fit, match a role to the user's background, identify gaps, decide whether to apply, tailor a CV/profile summary, or explain how well a position aligns with the user's experience.
+Origem: `$CODEX_HOME/skills/career-job-fit-evaluator/SKILL.md`
 
-Repositorio: `skills/career-job-fit-evaluator/SKILL.md`
-
-SHA-256: `b5d5306e3b5a9dba65a42a0d0bcd5897b239d77a919e49c0586beb367278561e`
-
-```md
+````markdown
 ---
 name: career-job-fit-evaluator
 description: Evaluate whether a job posting, recruiter message, LinkedIn role, or vacancy description is compatible with Ruben's CV, experience, target job profile, preferences, and positioning. Use when asked to assess job fit, match a role to the user's background, identify gaps, decide whether to apply, tailor a CV/profile summary, or explain how well a position aligns with the user's experience.
@@ -261,17 +276,13 @@ Use this concise structure unless the user requests another format:
 **Better-Fit Search Terms**
 - <Role titles, keywords, or industries if useful>
 ```
-```
+````
 
 ### career-pj-contract-risk-review
 
-Evaluate Brazilian PJ individual service arrangements for career decisions using contract scope, role/vacancy description, company context, operating model, and contexto-pj-brasil.md or the bundled PJ Brazil reference. Use when the user asks to review a vaga PJ, proposta PJ, contrato PJ, escopo de prestacao de servicos, pejotizacao risk, questions for the company/legal team, or points to negotiate before accepting or signing a PJ engagement.
+Origem: `$CODEX_HOME/skills/career-pj-contract-risk-review/SKILL.md`
 
-Repositorio: `skills/career-pj-contract-risk-review/SKILL.md`
-
-SHA-256: `87d72754a3a0df3ab2ae358c7ae5bf2effd68b1901655351f92e7ead59f9db0e`
-
-```md
+````markdown
 ---
 name: career-pj-contract-risk-review
 description: Evaluate Brazilian PJ individual service arrangements for career decisions using contract scope, role/vacancy description, company context, operating model, and contexto-pj-brasil.md or the bundled PJ Brazil reference. Use when the user asks to review a vaga PJ, proposta PJ, contrato PJ, escopo de prestacao de servicos, pejotizacao risk, questions for the company/legal team, or points to negotiate before accepting or signing a PJ engagement.
@@ -388,17 +399,13 @@ For the contratante:
 - Do not tell the user a contract is "legal" or "illegal" with certainty.
 - Do not draft final legal clauses as if acting as counsel unless the user asks for a draft; even then, label as a discussion draft for lawyer review.
 - If the user's facts strongly resemble employment, say so plainly and recommend specialized legal review before signing.
-```
+````
 
 ### career-review-company-ratings
 
-Analyze public employee-review pages for a target company and summarize only reviews whose job titles are related or adjacent to career targets such as technology, IT, data, product management, project/program management, PMO, implementation, digital transformation, business systems, or product operations. Use when the user asks to inspect Glassdoor, Indeed, Comparably, Love Mondays-style company reviews, filter by relevant roles, compute average review scores, and synthesize pros and cons for career decision-making.
+Origem: `$CODEX_HOME/skills/career-review-company-ratings/SKILL.md`
 
-Repositorio: `skills/career-review-company-ratings/SKILL.md`
-
-SHA-256: `072bfc8d1e25ab7d2cb3cc7bcfc9c90076ef2fc742ea13d493c8d6439a7c0a07`
-
-```md
+````markdown
 ---
 name: career-review-company-ratings
 description: Analyze public employee-review pages for a target company and summarize only reviews whose job titles are related or adjacent to career targets such as technology, IT, data, product management, project/program management, PMO, implementation, digital transformation, business systems, or product operations. Use when the user asks to inspect Glassdoor, Indeed, Comparably, Love Mondays-style company reviews, filter by relevant roles, compute average review scores, and synthesize pros and cons for career decision-making.
@@ -501,17 +508,13 @@ Before finalizing:
 - Check that pros/cons summaries are not borrowed from excluded roles.
 - Cite sources used.
 - State uncertainty clearly when platform access or snippets limit coverage.
-```
+````
 
 ### career-salary-market-research
 
-Research current salary ranges for a job position by company, role/title, contract type, and market using Glassdoor as the priority source and Michael Page as a secondary benchmark. Use when the user asks for salario, salary, remuneracao, compensation, media salarial, Glassdoor salary, Michael Page salary guide, or wants monthly and annual salary estimates with sources, company-name ambiguity checks, fallback to comparable companies, and a confidence level.
+Origem: `$CODEX_HOME/skills/career-salary-market-research/SKILL.md`
 
-Repositorio: `skills/career-salary-market-research/SKILL.md`
-
-SHA-256: `1775f89fd18b52255b4e0d3530ac263167540ea4c4df5b873f072c80f66a6d97`
-
-```md
+````markdown
 ---
 name: career-salary-market-research
 description: Research current salary ranges for a job position by company, role/title, contract type, and market using Glassdoor as the priority source and Michael Page as a secondary benchmark. Use when the user asks for salario, salary, remuneracao, compensation, media salarial, Glassdoor salary, Michael Page salary guide, or wants monthly and annual salary estimates with sources, company-name ambiguity checks, fallback to comparable companies, and a confidence level.
@@ -599,17 +602,13 @@ When the estimate is not an exact company-role match, say that clearly before th
 - Very low: only snippets, stale pages, one comparable observation, unclear contract type, unclear market, or conflicting data.
 
 Never fabricate salary values or hidden sample counts. If the data is unavailable, say so and provide the best available benchmark with low confidence.
-```
+````
 
 ### career-tailor-cv-to-job
 
-Adapt an existing editable CV/resume to a specific job description while preserving the original document formatting and generating a PDF. Use when the user sends a vacancy/job description and asks to tailor, reescrever, otimizar para ATS, adaptar CV/curriculo/resume, extrair palavras-chave da vaga, update the Objective/Objetivo section, or create a PDF named for the candidate and job title without inventing experience or changing real job history. If the only source is PDF, use this skill only to save/analyze the original and request an editable source before producing the final formatted CV.
+Origem: `$CODEX_HOME/skills/career-tailor-cv-to-job/SKILL.md`
 
-Repositorio: `skills/career-tailor-cv-to-job/SKILL.md`
-
-SHA-256: `800c59727dcfed8f93b9ad1709bb448808149229f7adf2817917b37b1ddfe3fe`
-
-```md
+````markdown
 ---
 name: career-tailor-cv-to-job
 description: Adapt an existing editable CV/resume to a specific job description while preserving the original document formatting and generating a PDF. Use when the user sends a vacancy/job description and asks to tailor, reescrever, otimizar para ATS, adaptar CV/curriculo/resume, extrair palavras-chave da vaga, update the Objective/Objetivo section, or create a PDF named for the candidate and job title without inventing experience or changing real job history. If the only source is PDF, use this skill only to save/analyze the original and request an editable source before producing the final formatted CV.
@@ -743,17 +742,13 @@ Keep the final response short. Provide:
 - Core competencies targeted.
 - Any job keywords not used because they were unsupported by the original CV.
 - If blocked by PDF-only input, say that the original PDF was saved/analyzed and ask for the editable CV source instead of returning a flawed final PDF.
-```
+````
 
 ### career-translate-cv-to-english
 
-Translate an existing tailored CV/resume into natural, ATS-friendly professional English while preserving the editable document formatting and exporting an updated PDF. Use when Codex needs to convert a Portuguese CV to English for a specific job, adapt bullet phrasing to English-speaking resume expectations, avoid literal translations, keep facts unchanged, and produce an English ODT/DOCX/PDF version.
+Origem: `$CODEX_HOME/skills/career-translate-cv-to-english/SKILL.md`
 
-Repositorio: `skills/career-translate-cv-to-english/SKILL.md`
-
-SHA-256: `dd1d2fb9e1918a48aef5f31bf124d70297641a06b9ca5a6a1faf1860665b731a`
-
-```md
+````markdown
 ---
 name: career-translate-cv-to-english
 description: Translate an existing tailored CV/resume into natural, ATS-friendly professional English while preserving the editable document formatting and exporting an updated PDF. Use when Codex needs to convert a Portuguese CV to English for a specific job, adapt bullet phrasing to English-speaking resume expectations, avoid literal translations, keep facts unchanged, and produce an English ODT/DOCX/PDF version.
@@ -840,17 +835,13 @@ When working on Ruben's CV files, preserve existing AI/tool/course additions if 
 - Keep `Claude Code`, `OpenAi Codex`, and `Agent Skills` in the AI/tools line.
 - Keep `Claude Code in Action - Anthropic`, `Introduction to Agent Skills - Anthropic`, `Introduction to Model Context Protocol - Anthropic`, and `Buiding with the Claude API - Anthropic`.
 - Do not add a Languages section or English fluency unless the user explicitly requests it.
-```
+````
 
 ### codex-ops-publish-local-skills-catalog
 
-Compare user-created local Codex skills in $CODEX_HOME/skills with the GitHub catalog repository, synchronize changed skill folders and generated catalog files, validate the result, and publish safe updates to GitHub. Use when the user asks to varrer, sincronizar, comparar, atualizar, publicar, pushar, or catalogar local skills in manager-rubens/codex-skills or another personal skills catalog repository.
+Origem: `$CODEX_HOME/skills/codex-ops-publish-local-skills-catalog/SKILL.md`
 
-Repositorio: `skills/codex-ops-publish-local-skills-catalog/SKILL.md`
-
-SHA-256: `be95f876486a0c54aa5c5071619030b4bf480b26c6cf0e58b2920eece70a6ea8`
-
-```md
+````markdown
 ---
 name: codex-ops-publish-local-skills-catalog
 description: Compare user-created local Codex skills in $CODEX_HOME/skills with the GitHub catalog repository, synchronize changed skill folders and generated catalog files, validate the result, and publish safe updates to GitHub. Use when the user asks to varrer, sincronizar, comparar, atualizar, publicar, pushar, or catalogar local skills in manager-rubens/codex-skills or another personal skills catalog repository.
@@ -944,17 +935,13 @@ Report:
 - any blocked step and the exact reason.
 
 Keep the final response short when publication succeeds. If publication is blocked, give the next safe action.
-```
+````
 
 ### codex-ops-skill-usage-auditor
 
-Audit how a Codex skill was used in a conversation or transcript, mapping invoked skills, shell/tool commands, app/browser/web calls, file edits, procedures performed, repeated steps, friction points, and concrete opportunities to improve the skill workflow. Use when the user asks to audit, review, varrer, analisar, or mapear uso de skill; list commands or procedures used by a skill; reduce repetitive work after a skill run; or turn a conversation into skill improvements.
+Origem: `$CODEX_HOME/skills/codex-ops-skill-usage-auditor/SKILL.md`
 
-Repositorio: `skills/codex-ops-skill-usage-auditor/SKILL.md`
-
-SHA-256: `66cf59b4274be774c058e6f3d2877c5ef7d3bb1b43a766ac813bd0af57af661d`
-
-```md
+````markdown
 ---
 name: codex-ops-skill-usage-auditor
 description: Audit how a Codex skill was used in a conversation or transcript, mapping invoked skills, shell/tool commands, app/browser/web calls, file edits, procedures performed, repeated steps, friction points, and concrete opportunities to improve the skill workflow. Use when the user asks to audit, review, varrer, analisar, or mapear uso de skill; list commands or procedures used by a skill; reduce repetitive work after a skill run; or turn a conversation into skill improvements.
@@ -1031,17 +1018,13 @@ Use a concise report with these sections:
 - **Next Patch**: the smallest high-value edit to make first, if the user wants implementation.
 
 Keep the report operational. Avoid generic advice; tie every recommendation to an observed command, procedure, gap, or repeated step.
-```
+````
 
 ### product-dev-prd-to-codex-prompt
 
-Create a clear, complete initial prompt for OpenAI Codex from a Product Requirements Document (PRD). Use when the user wants to turn a PRD, product spec, feature brief, ticket, or requirements document into a Codex-ready prompt for implementation, refactoring, debugging, review, testing, or planning. The skill must require the user to provide or attach a PRD before drafting the prompt.
+Origem: `$CODEX_HOME/skills/product-dev-prd-to-codex-prompt/SKILL.md`
 
-Repositorio: `skills/product-dev-prd-to-codex-prompt/SKILL.md`
-
-SHA-256: `3dc9ff173f12430bb89e8e35e1c7447f4d7f1b218ad8bcffcd49e7b947c1a3e9`
-
-```md
+````markdown
 ---
 name: product-dev-prd-to-codex-prompt
 description: Create a clear, complete initial prompt for OpenAI Codex from a Product Requirements Document (PRD). Use when the user wants to turn a PRD, product spec, feature brief, ticket, or requirements document into a Codex-ready prompt for implementation, refactoring, debugging, review, testing, or planning. The skill must require the user to provide or attach a PRD before drafting the prompt.
@@ -1147,17 +1130,13 @@ Open Questions Or Assumptions
 ## Handling Weak PRDs
 
 If the PRD lacks implementation detail but still defines the product outcome, generate a prompt that instructs Codex to inspect the repo and ask for clarification before making high-risk decisions. If the PRD lacks the actual product outcome, ask the user for a fuller PRD instead of generating the prompt.
-```
+````
 
 ### product-prd-interviewer
 
-Act as a senior product professional to interview the user about an app, SaaS, internal tool, platform, website, automation, or software product and turn the discovery into a professional Product Requirements Document (PRD). Use when the user asks to be interviewed about a product idea, define app objectives, create a PRD, product brief, MVP scope, requirements document, user stories, acceptance criteria, feature spec, or product handoff for development. Trigger on Portuguese or English requests such as "me entrevista para entender o app", "gera um PRD", "brief de produto", "requisitos da aplicacao", "product requirements", or "turn this idea into a PRD".
+Origem: `$CODEX_HOME/skills/product-prd-interviewer/SKILL.md`
 
-Repositorio: `skills/product-prd-interviewer/SKILL.md`
-
-SHA-256: `c64d690a509f25d31a46164330c6affc0dcec1a8764dc4bcb8c96f8329871f8e`
-
-```md
+````markdown
 ---
 name: product-prd-interviewer
 description: Act as a senior product professional to interview the user about an app, SaaS, internal tool, platform, website, automation, or software product and turn the discovery into a professional Product Requirements Document (PRD). Use when the user asks to be interviewed about a product idea, define app objectives, create a PRD, product brief, MVP scope, requirements document, user stories, acceptance criteria, feature spec, or product handoff for development. Trigger on Portuguese or English requests such as "me entrevista para entender o app", "gera um PRD", "brief de produto", "requisitos da aplicacao", "product requirements", or "turn this idea into a PRD".
@@ -1237,17 +1216,13 @@ Strong PRDs include:
 - Metrics and instrumentation ideas.
 - Risks, assumptions, dependencies, and open questions.
 - A pragmatic MVP release plan.
-```
+````
 
 ### product-rice-matrix
 
-Create a Product Management RICE prioritization matrix for a set of previously scoped tasks. Use when the user asks to classify, rank, prioritize, score, or compare roadmap/Kanban/backlog tasks using RICE, especially when task titles, status, summaries, scope, acceptance criteria, Notion cards, issues, tickets, or PRD tasks are already available. Always base scoring on the provided task scope and evidence; do not invent missing scope.
+Origem: `$CODEX_HOME/skills/product-rice-matrix/SKILL.md`
 
-Repositorio: `skills/product-rice-matrix/SKILL.md`
-
-SHA-256: `61bd8fbfbaa3dc0d46db25500caba1a9ad41069a879d504ff73c398eb87950d1`
-
-```md
+````markdown
 ---
 name: product-rice-matrix
 description: Create a Product Management RICE prioritization matrix for a set of previously scoped tasks. Use when the user asks to classify, rank, prioritize, score, or compare roadmap/Kanban/backlog tasks using RICE, especially when task titles, status, summaries, scope, acceptance criteria, Notion cards, issues, tickets, or PRD tasks are already available. Always base scoring on the provided task scope and evidence; do not invent missing scope.
@@ -1330,17 +1305,13 @@ Use these defaults when exact metrics are unavailable:
 ## Output Tone
 
 Be decisive but transparent. Make the ranking useful for sequencing work, not merely mathematically neat. Prefer short rationales tied to scope and acceptance criteria.
-```
+````
 
 ### research-curadoria-eventos
 
-Buscar, curar e retornar eventos atuais para uma cidade usando fontes oficiais, APIs, portais locais, Instagram/redes sociais e inteligencia de eventos, com opcao de gerar PDF bonito com imagem de fonte para cada evento. Use quando o usuario pedir eventos, agenda cultural, shows, gastronomia, eventos corporativos, eventos gratuitos, programacao de fim de semana, o que fazer, roles, destaques por data, periodo, categoria, bairro, ponto turistico ou cidade, ou quando pedir um PDF/relatorio visual da agenda.
+Origem: `$CODEX_HOME/skills/research-curadoria-eventos/SKILL.md`
 
-Repositorio: `skills/research-curadoria-eventos/SKILL.md`
-
-SHA-256: `ab8404d8de3e4838b0e560ee9105a9949a530e40aae73eba4fbbe4c02f1673f1`
-
-```md
+````markdown
 ---
 name: research-curadoria-eventos
 description: Buscar, curar e retornar eventos atuais para uma cidade usando fontes oficiais, APIs, portais locais, Instagram/redes sociais e inteligencia de eventos, com opcao de gerar PDF bonito com imagem de fonte para cada evento. Use quando o usuario pedir eventos, agenda cultural, shows, gastronomia, eventos corporativos, eventos gratuitos, programacao de fim de semana, o que fazer, roles, destaques por data, periodo, categoria, bairro, ponto turistico ou cidade, ou quando pedir um PDF/relatorio visual da agenda.
@@ -1500,17 +1471,13 @@ O script aceita JSON como array de eventos ou como objeto:
   "eventos": []
 }
 ```
-```
+````
 
 ### research-pessoa-due-diligence
 
-Levantamento juridico, reputacional e de idoneidade documental de pessoa fisica com base em fontes publicas, oficiais ou autorizadas, reunindo documentos, links, processos, diarios oficiais, registros profissionais, sancoes, certidoes, sinais criminais publicos, informacoes militares publicas quando licitas e evidencias rastreaveis de boa ou ma conduta institucional. Use quando o usuario pedir investigacao juridica, due diligence, background check, "levantar tudo sobre uma pessoa", pesquisar processos, antecedentes, documentos, vinculos publicos, risco criminal, historico militar, certidoes, compliance, OSINT legal, reputacao, idoneidade, "indole" ou relatorio rastreavel sobre uma pessoa identificada ou parcialmente identificada.
+Origem: `$CODEX_HOME/skills/research-pessoa-due-diligence/SKILL.md`
 
-Repositorio: `skills/research-pessoa-due-diligence/SKILL.md`
-
-SHA-256: `899d6c12a3c59f9d2515efa30c55c16ef307f892f04e49dc6acffc743a219cb9`
-
-```md
+````markdown
 ---
 name: research-pessoa-due-diligence
 description: Levantamento juridico, reputacional e de idoneidade documental de pessoa fisica com base em fontes publicas, oficiais ou autorizadas, reunindo documentos, links, processos, diarios oficiais, registros profissionais, sancoes, certidoes, sinais criminais publicos, informacoes militares publicas quando licitas e evidencias rastreaveis de boa ou ma conduta institucional. Use quando o usuario pedir investigacao juridica, due diligence, background check, "levantar tudo sobre uma pessoa", pesquisar processos, antecedentes, documentos, vinculos publicos, risco criminal, historico militar, certidoes, compliance, OSINT legal, reputacao, idoneidade, "indole" ou relatorio rastreavel sobre uma pessoa identificada ou parcialmente identificada.
@@ -1624,17 +1591,13 @@ Entregar em portugues, salvo pedido contrario. Usar esta estrutura:
 - Quando usar noticias ou fontes secundarias, indicar que sao secundarias e buscar confirmacao oficial.
 - Nao deixar achado negativo sem contexto processual atual quando a fonte permitir verificar movimentacoes, status, extincao, arquivamento, absolvição ou recurso.
 - Fazer perguntas de follow-up quando o proximo passo depender de dado identificador, jurisdicao ou autorizacao.
-```
+````
 
 ### weather-next-weekend-bh-sp
 
-List the weather forecast for the next weekend in Belo Horizonte, Jundiai, Guarulhos, and Sao Paulo city. Use when the user asks for "tempo", weather, forecast, chuva, temperatura, or weekend conditions for BH, Jundiai, Guarulhos, and SP together, especially for the upcoming Saturday and Sunday.
+Origem: `$CODEX_HOME/skills/weather-next-weekend-bh-sp/SKILL.md`
 
-Repositorio: `skills/weather-next-weekend-bh-sp/SKILL.md`
-
-SHA-256: `5ef13bf45ae3c3cc0671f3bc6566711ced3b6bd58f5c28fd3b43735ac6d21a95`
-
-```md
+````markdown
 ---
 name: weather-next-weekend-bh-sp
 description: List the weather forecast for the next weekend in Belo Horizonte, Jundiai, Guarulhos, and Sao Paulo city. Use when the user asks for "tempo", weather, forecast, chuva, temperatura, or weekend conditions for BH, Jundiai, Guarulhos, and SP together, especially for the upcoming Saturday and Sunday.
@@ -1680,4 +1643,4 @@ Previsao para o proximo fim de semana: <sabado data> e <domingo data>.
 
 Fonte: <tool/source>, consultado em <date>.
 ```
-```
+````
